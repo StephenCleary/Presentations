@@ -1,4 +1,4 @@
 Presentations
 =============
 
-Repository for presentations
+Repository for presentations by [Stephen Cleary](http://stephencleary.com/).

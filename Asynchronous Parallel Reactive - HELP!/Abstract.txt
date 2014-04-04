@@ -1,0 +1,9 @@
+- Asynchronous? Parallel? Reactive? Help!
+
+The modern world of concurrency can certainly be confusing! This talk is a gentle introduction to the many forms of concurrency. Most developers have heard of parallelism, so we'll start by covering the three forms of parallel computing, showcasing the Parallel class and Parallel LINQ (PLINQ).
+
+The next stop will be asynchronous code. We'll cover how asynchronous code is a totally different kind of concurrency than parallel processing, and consider how the async and await keywords work to enable maintainable asynchronous code.
+
+Before the last point, we'll spend some time looking at TPL Dataflow. A beautiful mix of parallel and asynchronous techniques, TPL Dataflow is a little-known but extremely powerful library.
+
+Finally, I'll introduce Reactive Extensions as yet another form of concurrency. I'll describe the concepts behind Rx as well as the most useful operators. And I'll keep it practical; I promise not to say "mathematical dual of IEnumerable" even once.

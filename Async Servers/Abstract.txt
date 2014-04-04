@@ -1,0 +1,7 @@
+Async/await is one of the most celebrated language improvements in modern times, but does it have a place in server-side code? The answer is most definitely "yes," and this talk will explore using async and await on the server.
+
+We'll start out with an introduction to async and await, with a special emphasis on the benefits that asynchronous code brings to the server side. In particular, we'll examine how async can help you scale (and situations where it won't!).
+
+Next, we'll cover the basic requirements for using async/await on ASP.NET. We'll discuss common problems and solutions, and solve some "pain points" for async servers.
+
+You'll walk away with a solid understanding of asynchronous ASP.NET solutions, how they compare with Node.js, and how to avoid the common pitfalls.

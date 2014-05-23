@@ -1,0 +1,11 @@
+It'll sure be a wonderful time when everything is using REST and WebSockets!
+
+Until then, we have to live in the real world.
+
+This language-agnostic talk will teach you everything you need to know about designing application protocols for TCP/IP. We'll start out strong by dispelling some common myths and establishing some core properties of TCP/IP itself. Then we'll build on this foundation by identifying some key requirements for most application protocols. Finally, we'll examine various solutions for those requirements and consider the pros and cons of each.
+
+Along the way, you'll learn why HTTP and FTP are sub-optimal, and how the WebSocket protocol is an improvement.
+
+By the end of this session, you will have all the knowledge you need to implement a TCP/IP protocol.
+
+You're not on a standards committee, you say? How about this: by the end of this session, you'll be able to clearly explain to co-vendors why their home-grown TCP/IP protocols are subtly broken, and how to fix them. ;)

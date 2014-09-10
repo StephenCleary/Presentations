@@ -1,5 +1,5 @@
-If we could redesign FTP and HTTP today, how would they look different?
+Most TCP/IP protocols are poorly designed. Surprised? HTTP and FTP have changed over the years, and newer protocols such as WebSockets are designed much more carefully.
 
-This language-agnostic talk will teach you everything you need to know about designing application protocols for TCP/IP. The three essential pillars of TCP/IP protocols will be covered in depth: Connections, Message Framing, and Keepalives. We'll use HTTP and FTP as examples, observing how (and why) they have changed over the years.
+This language-agnostic talk will teach you everything you need to know about designing application protocols for TCP/IP. You'll learn about the three essential pillars of TCP/IP protocols: Connections, Message Framing, and Keepalives.
 
-You'll also learn enough to implement a TCP/IP protocol of your own, should the need arise. Some day we'll all be using REST and WebSockets, but it is still very common to have to deal with hand-grown protocols; after attending this session, you'll be able to identify and clearly explain subtle problems with any TCP/IP protocol.
+With the Internet of Things right around the corner, proper TCP/IP protocol design has never been more important. This session will teach you how to use TCP/IP sockets effectively to communicate with any kind of device.

@@ -1,0 +1,12 @@
+﻿<Window x:Class="SimpleMultithreading.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Button x:Name="SynchronousButton" Content="Synchronous" HorizontalAlignment="Left" Margin="42,33,0,0" VerticalAlignment="Top" Width="93" Click="SynchronousButton_Click"/>
+        <Label x:Name="SynchronousLabel" Content="" HorizontalAlignment="Left" Margin="168,30,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="MultithreadedButton" Content="Multithreaded" HorizontalAlignment="Left" Margin="42,64,0,0" VerticalAlignment="Top" Width="93" Click="MultithreadedButton_Click"/>
+        <Label x:Name="MultithreadedLabel" Content="" HorizontalAlignment="Left" Margin="168,61,0,0" VerticalAlignment="Top"/>
+
+    </Grid>
+</Window>

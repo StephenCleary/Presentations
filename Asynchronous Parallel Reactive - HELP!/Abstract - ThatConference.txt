@@ -1,0 +1,11 @@
+- Nature hike through the .NET concurrency landscape
+
+Asynchronous? Parallel? Reactive? Help!
+
+The modern landscape of concurrency can certainly be confusing, and it's natural to feel lost! Join us for a guided hike on a gentle trail through the many forms of concurrency. The first stop on our trail is the most common and familiar: parallelism. We'll briefly study the important aspects of the two landmarks there: the Parallel class and Parallel LINQ.
+
+The next stop will be asynchronous code. Asynchronous code is a totally different kind of concurrency than parallel processing, and we'll learn the basics of how the async and await undergrowth helps us build maintainable asynchronous code.
+
+Along the way, we'll observe the local wildlife in the form of TPL Dataflow. A beautiful mix of parallel and asynchronous techniques, TPL Dataflow is a little-known but extremely powerful library.
+
+The final stop is Reactive Extensions (Rx), yet another form of concurrency. We'll examine the concepts behind Rx as well as the most useful operators. And I'll keep it practical; I promise not to say "mathematical dual of IEnumerable" even once.

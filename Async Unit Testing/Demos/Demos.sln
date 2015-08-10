@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "1 IncorrectlyPassingUnitTest", "IncorrectlyPassingUnitTest\1 IncorrectlyPassingUnitTest.csproj", "{C8CE1F0D-8988-467D-91E1-F224A497D5EA}"
 EndProject
@@ -16,6 +16,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "4 ABitMoreRealWorld", "ABitMoreRealWorld\4 ABitMoreRealWorld.csproj", "{A44B1356-9598-42EB-8429-24D8EA329B93}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "5 ReallyMSStoreAppsReally", "ReallyMSStoreAppsReally\5 ReallyMSStoreAppsReally.csproj", "{957B1FF0-E794-4F1F-93DA-5D5462D15ACB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "6 Timing", "Timing\6 Timing.csproj", "{5E839DC7-A3C1-4E8F-B249-853EB31B323A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -113,6 +115,22 @@ Global
 		{957B1FF0-E794-4F1F-93DA-5D5462D15ACB}.Release|x86.ActiveCfg = Release|x86
 		{957B1FF0-E794-4F1F-93DA-5D5462D15ACB}.Release|x86.Build.0 = Release|x86
 		{957B1FF0-E794-4F1F-93DA-5D5462D15ACB}.Release|x86.Deploy.0 = Release|x86
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Debug|ARM.Build.0 = Debug|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Debug|x64.Build.0 = Debug|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Debug|x86.Build.0 = Debug|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Release|ARM.ActiveCfg = Release|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Release|ARM.Build.0 = Release|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Release|x64.ActiveCfg = Release|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Release|x64.Build.0 = Release|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Release|x86.ActiveCfg = Release|Any CPU
+		{5E839DC7-A3C1-4E8F-B249-853EB31B323A}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

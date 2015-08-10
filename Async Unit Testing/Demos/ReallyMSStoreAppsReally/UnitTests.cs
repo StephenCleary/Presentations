@@ -9,17 +9,17 @@ using Microsoft.VisualStudio.TestPlatform.UnitTestFramework.AppContainer;
 namespace ReallyMSStoreAppsReally
 {
     [TestClass]
-    public class UnitTests
+    public class E_UnitTests
     {
         [UITestMethod]
-        public async Task UITestMethodDoesNotSupportAsync()
+        public async Task E_A_UITestMethodDoesNotSupportAsync()
         {
             // Fails. UITestMethod doesn't support async test methods. :(
             await Task.Yield();
         }
 
         [TestMethod]
-        public async Task HaveToUseThisWorkaround()
+        public async Task E_B_HaveToUseThisWorkaround()
         {
             await MSStoreHelp.ExecuteAsync(async () => { await Task.Yield(); });
         }

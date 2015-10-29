@@ -4,6 +4,7 @@ using FakeItEasy;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NSubstitute;
+using Rhino.Mocks;
 
 namespace AsyncMocks
 {
@@ -71,6 +72,37 @@ namespace AsyncMocks
             };
 
             await sut.UseServiceAsync();
+        }
+
+        [TestMethod]
+        public async Task C_F_RhinoMocksDynamicMockDoesntWorkWell()
+        {
+            var mocks = new Rhino.Mocks.MockRepository();
+            var service = mocks.DynamicMock<IService>();
+            var sut = new Sut
+            {
+                Service = service
+            };
+
+            mocks.ReplayAll();
+            await sut.UseServiceAsync();
+            mocks.VerifyAll();
+        }
+
+        [TestMethod]
+        public async Task C_G_RhinoMocksButIfYouExplicitlyExpectThenOfCourseItWorks()
+        {
+            var mocks = new Rhino.Mocks.MockRepository();
+            var service = mocks.DynamicMock<IService>();
+            Expect.Call(service.DoSomethingAsync()).Return(Task.CompletedTask);
+            var sut = new Sut
+            {
+                Service = service
+            };
+
+            mocks.ReplayAll();
+            await sut.UseServiceAsync();
+            mocks.VerifyAll();
         }
     }
 }

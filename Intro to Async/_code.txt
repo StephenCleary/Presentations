@@ -1,0 +1,121 @@
+            // What operations do these tasks represent?
+            // One has a result value; the other does not.
+
+---
+
+        private async Task DoWorkAsync()
+        {
+            ListBox.Items.Add("Hi!");
+            await Task.Delay(2000);
+            ListBox.Items.Add("Still here!");
+        }
+
+---
+
+        private async Task DoWorkAsync()
+        {
+            ListBox.Items.Add("Hi!");
+            await Task.Delay(2000);
+            throw new Exception("Blah");
+        }
+
+        private async void Button1_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                await DoWorkAsync();
+            }
+            catch (Exception ex)
+            {
+                ListBox.Items.Add(ex.Message);
+            }
+        }
+
+---
+
+        private async void Button1_Click(object sender, RoutedEventArgs e)
+        {
+            // No exception thrown here.
+            var task = DoWorkAsync();
+            try
+            {
+                // Exception thrown here.
+                await task;
+            }
+            catch (Exception ex)
+            {
+                ListBox.Items.Add(ex.Message);
+            }
+        }
+
+---
+
+        private async Task DoWorkAsync(CancellationToken token)
+        {
+            ListBox.Items.Add("Hi!");
+            await Task.Delay(2000, token);
+            ListBox.Items.Add("Finished!");
+        }
+
+        private CancellationTokenSource _cts;
+
+        private async void Button1_Click(object sender, RoutedEventArgs e)
+        {
+            _cts = new CancellationTokenSource();
+            try
+            {
+                await DoWorkAsync(_cts.Token);
+            }
+            catch (OperationCanceledException ex)
+            {
+                ListBox.Items.Add("Canceled: " + ex.Message);
+            }
+            catch (Exception ex)
+            {
+                ListBox.Items.Add("Faulted: " + ex.Message);
+            }
+        }
+
+        private void Button2_Click(object sender, RoutedEventArgs e)
+        {
+            _cts.Cancel();
+        }
+
+---
+
+        private async Task DoWorkAsync()
+        {
+            ListBox.Items.Add("Hi!");
+
+            // The total time here is only 2 seconds; both delays are concurrent.
+            var task1 = Task.Delay(2000);
+            var task2 = Task.Delay(2000);
+            await Task.WhenAll(task1, task2);
+
+            ListBox.Items.Add("Done!");
+        }
+
+        private async void Button1_Click(object sender, RoutedEventArgs e)
+        {
+            await DoWorkAsync();
+        }
+
+---
+
+        private async void Button3_Click(object sender, RoutedEventArgs e)
+        {
+            var progress = new Progress<string>(report => ListBox.Items.Add(report));
+            var result = await Task.Run(() => DoSynchronousWork(10, progress));
+            ListBox.Items.Add("Done: " + result);
+        }
+
+        private int DoSynchronousWork(int value, IProgress<string> progress)
+        {
+            for (int i = 0; i != value; ++i)
+            {
+                if (progress != null)
+                    progress.Report("Stage " + i);
+                Thread.Sleep(500);
+            }
+            return value;
+        }

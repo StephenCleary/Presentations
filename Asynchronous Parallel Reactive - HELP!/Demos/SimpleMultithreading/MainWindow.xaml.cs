@@ -29,7 +29,7 @@ namespace SimpleMultithreading
         private void DoWork()
         {
             // Represents CPU-bound work.
-            for (int i = 0; i != 300; ++i)
+            for (int i = 0; i != 3000; ++i)
                 Thread.Sleep(1);
         }
 

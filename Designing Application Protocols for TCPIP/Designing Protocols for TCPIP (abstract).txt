@@ -1,5 +1,0 @@
-Most TCP/IP protocols are poorly designed. Surprised? HTTP and FTP have changed over the years, and newer protocols such as WebSockets are designed much more carefully.
-
-This language-agnostic talk will teach you everything you need to know about designing application protocols for TCP/IP. You'll learn about the three essential pillars of TCP/IP protocols: Connections, Message Framing, and Keepalives.
-
-With the Internet of Things right around the corner, proper TCP/IP protocol design has never been more important. This session will teach you how to use TCP/IP sockets effectively to communicate with any kind of device.

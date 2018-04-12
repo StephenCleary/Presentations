@@ -1,0 +1,9 @@
+- Miners aren't your friends.
+- Spending and Estimating gas.
+  - Setting appropriate gas cost.
+- Trust means immutable.
+
+Patterns:
+Owner
+Withdraw
+Proxy

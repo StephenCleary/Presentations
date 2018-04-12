@@ -46,3 +46,15 @@ The second part of this session deals with best practices and techniques for int
 Participants are encouraged to write async code right from the very beginning, and will practice converting synchronous code to async/await. Feel free to bring your own project and questions!
 
 You should bring a laptop with Visual Studio 2013 or 2012 installed (the Express edition is fine).
+
+
+
+Intro to Async
+
+Confused by async? Relax, you're not alone. Async and await are useful and powerful, but they do have a bit of a learning curve.
+
+This session is an introduction to async and await. It covers what the keywords mean and - just as importantly - what they *don't* mean. This talk does not cover every detail of code transformation; instead, it focuses on What You Need To Know. You will be empowered with appropriate conceptual models of async/await rather than drowning in minutiae.
+
+Once the basics are covered, we'll also deal with best practices and techniques for writing asynchronous code, pointing out common pitfalls along the way.
+
+Note: this session is an introduction to async/await for both C# *and* JavaScript.

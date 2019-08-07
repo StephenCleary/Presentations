@@ -27,9 +27,9 @@ Async Brownfield Development
   - Sync over async: various approaches and their drawbacks.
 - Grow up. Lowest-level first.
 
-Writing asynchronous code is not too hard when backwards compatibility is not a concern. This session teaches you how to apply asynchronous code to an existing codebase.
+Writing asynchronous code is not too hard when backwards compatibility is not a concern. This session teaches you how to apply asynchronous code to an existing codebase, which brings its own unique challenges.
 
-In this session, learn how to tell which operations are naturally asynchronous, and the best approaches for introducing async/await to a synchronous system. This talk will cover how to create a vertical partition of async code within an application, even if the existing app doesn't have the best design.
+In this session, learn how to tell which operations are naturally asynchronous, and the best approaches for introducing async/await to a synchronous system. This talk will cover how to create a vertical partition of async code within an application, even if the existing app doesn't have the best design. We'll also cover a variety of approaches for mixing synchronous and asynchronous code, and discuss the advantages and drawbacks of each approach.
 
 You'll walk away with an understanding of how to get async's foot in the door of your system, and how to expand it gradually through your codebase while keeping backwards compatibility throughout.
 

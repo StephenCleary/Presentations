@@ -1,4 +1,4 @@
-The async keyword seems to be taking over the world! After a humble beginning in F#, it quickly moved to C#/VB, and today it is invading many other “big” languages: JavaScript (ES2017), Python, and C++ (“resumable functions” proposal).
+The async keyword seems to be taking over the world! After a humble beginning in F#, it quickly moved to C#/VB, and today it is invading many other “big” languages: JavaScript (ES2017), Python, and C++ (“coroutines” proposal).
 
 So, what’s the big deal about async? This session is a conceptual overview of why asynchrony is important,
 especially in modern computing. At a high level, we’ll discuss how language support for asynchrony helps developers write more clear, maintainable code. At the core of all these languages, the basic async/await transformation is quite similar.

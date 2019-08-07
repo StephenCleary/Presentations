@@ -1,0 +1,7 @@
+Async/await is one of the most celebrated language improvements in modern times, but how does it interact with ASP.NET? Does Core change anything? Can I still use it with my ASP.NET "Precore" Caveman Edition?
+
+These questions and more will be addressed by this session. We'll start with a conceptual introduction to async and why it's particularly beneficial for server-side code. We'll also be sure to cover many myths, explaining what async *won't* do for you!
+
+Next, we'll cover the basic requirements for using async/await on ASP.NET, both Core and Classic. We'll discuss common problems and solutions, and solve some "pain points" for async servers.
+
+You'll walk away with a solid understanding of asynchronous ASP.NET solutions, how they compare with Node.js, and how to avoid the common pitfalls.

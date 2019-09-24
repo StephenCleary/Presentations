@@ -16,7 +16,7 @@ namespace Demos
             try
             {
                 // Basic demo
-                //await AwaitAndYieldReturnMain();
+                await AwaitAndYieldReturnMain();
 
                 // Use case demo
                 //await PagingApiMain();
@@ -28,7 +28,7 @@ namespace Demos
                 //await SuperchargeLinqMain();
 
                 //await SimpleCancellationMain();
-                await ComplexCancellationMain();
+                //await ComplexCancellationMain();
             }
             catch (Exception ex)
             {

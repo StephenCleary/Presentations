@@ -16,19 +16,26 @@ namespace Demos
             try
             {
                 // Basic demo
-                await AwaitAndYieldReturnMain();
+                //YieldReturnMain();
+                //await AwaitAndYieldReturnMain();
 
                 // Use case demo
                 //await PagingApiMain();
 
+                // Basic LINQ demo
                 //await BasicLinqMain();
+
+                // Async LINQ demo
                 //await LinqWithAsyncLambdasMain();
                 //await TerminalLinqMethodMain();
-                //await TerminalLinqMethodWithAsyncLambdasMain();
+                //await TerminalLinqMethodWithAsyncLambdasMain(); // (can skip)
+
+                // Supercharged LINQ demo
                 //await SuperchargeLinqMain();
 
+                // Cancellation demo
                 //await SimpleCancellationMain();
-                //await ComplexCancellationMain();
+                await ComplexCancellationMain();
             }
             catch (Exception ex)
             {
@@ -37,14 +44,50 @@ namespace Demos
             Console.WriteLine("Done.");
         }
 
+        #region EnumeratorBlocks
+        static void YieldReturnMain()
+        {
+            foreach (int item in YieldReturn())
+                Console.WriteLine($"Got {item}");
+
+            // same as:
+            using (var enumerator = YieldReturn().GetEnumerator())
+            {
+                while (enumerator.MoveNext())
+                {
+                    var item = enumerator.Current;
+                    Console.WriteLine($"Got {item}");
+                }
+            }
+        }
+
+        static IEnumerable<int> YieldReturn()
+        {
+            // Deferred execution!
+            yield return 1;
+            yield return 2;
+            yield return 3;
+        }
+        #endregion
+
         #region AwaitAndYieldReturn
         static async Task AwaitAndYieldReturnMain()
         {
             await foreach (int item in AwaitAndYieldReturn())
                 Console.WriteLine($"Got {item}");
 
-            await foreach (int item in AwaitAndYieldReturn().ConfigureAwait(false))
-                Console.WriteLine($"Got {item}");
+            // same as:
+            await using (var enumerator = AwaitAndYieldReturn().GetAsyncEnumerator())
+            {
+                while (await enumerator.MoveNextAsync())
+                {
+                    var item = enumerator.Current;
+                    Console.WriteLine($"Got {item}");
+                }
+            }
+
+            //await foreach (int item in AwaitAndYieldReturn().ConfigureAwait(false))
+            //    Console.WriteLine($"Got {item}");
         }
 
         static async IAsyncEnumerable<int> AwaitAndYieldReturn()
@@ -181,6 +224,7 @@ namespace Demos
             await foreach (int item in CancelableSlowRange(cts.Token))
                 Console.WriteLine($"{DateTime.Now:hh:mm:ss} Got {item}");
         }
+
 
 
 

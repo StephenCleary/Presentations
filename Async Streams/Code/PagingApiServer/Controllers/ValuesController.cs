@@ -14,7 +14,7 @@ namespace PagingApiServer.Controllers
         public async Task<IReadOnlyCollection<int>> Get(int limit = 10, int offset = 0)
         {
             await Task.Delay(TimeSpan.FromSeconds(3));
-            return Enumerable.Range(0, 23).Skip(offset).Take(limit).ToList();
+            return Enumerable.Range(0, 13).Skip(offset).Take(limit).ToList();
         }
     }
 }

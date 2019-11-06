@@ -16,26 +16,26 @@ namespace Demos
             try
             {
                 // Basic demo
-                //YieldReturnMain();
+                YieldReturnMain();
                 //await AwaitAndYieldReturnMain();
 
                 // Use case demo
                 //await PagingApiMain();
 
-                // Basic LINQ demo
+                // Async LINQ demo
                 //await BasicLinqMain();
 
-                // Async LINQ demo
+                // Async LINQ Delegates demo
                 //await LinqWithAsyncLambdasMain();
                 //await TerminalLinqMethodMain();
                 //await TerminalLinqMethodWithAsyncLambdasMain(); // (can skip)
 
-                // Supercharged LINQ demo
+                // LINQ -> Async LINQ demo
                 //await SuperchargeLinqMain();
 
                 // Cancellation demo
                 //await SimpleCancellationMain();
-                await ComplexCancellationMain();
+                //await ComplexCancellationMain();
             }
             catch (Exception ex)
             {
@@ -85,9 +85,6 @@ namespace Demos
                     Console.WriteLine($"Got {item}");
                 }
             }
-
-            //await foreach (int item in AwaitAndYieldReturn().ConfigureAwait(false))
-            //    Console.WriteLine($"Got {item}");
         }
 
         static async IAsyncEnumerable<int> AwaitAndYieldReturn()
@@ -120,7 +117,7 @@ namespace Demos
             {
                 // Get next page of results.
                 string jsonString = await HttpClient.GetStringAsync(
-                        $"http://localhost:53198/api/values?offset={offset}&limit={PageSize}");
+                    $"http://localhost:53198/api/values?offset={offset}&limit={PageSize}");
 
                 // Produce them for our consumer.
                 int[] results = JsonConvert.DeserializeObject<int[]>(jsonString);

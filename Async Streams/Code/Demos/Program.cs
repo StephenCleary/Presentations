@@ -6,6 +6,11 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
+// ReSharper disable SuggestVarOrType_SimpleTypes
+// ReSharper disable ConvertToUsingDeclaration
+// ReSharper disable ArrangeTypeMemberModifiers
+// ReSharper disable ArrangeTypeModifiers
+#pragma warning disable IDE0063 // Use simple 'using' statement
 
 namespace Demos
 {
@@ -51,11 +56,11 @@ namespace Demos
                 Console.WriteLine($"Got {item}");
 
             // same as:
-            using (var enumerator = YieldReturn().GetEnumerator())
+            using (IEnumerator<int> enumerator = YieldReturn().GetEnumerator())
             {
                 while (enumerator.MoveNext())
                 {
-                    var item = enumerator.Current;
+                    int item = enumerator.Current;
                     Console.WriteLine($"Got {item}");
                 }
             }
@@ -77,11 +82,11 @@ namespace Demos
                 Console.WriteLine($"Got {item}");
 
             // same as:
-            await using (var enumerator = AwaitAndYieldReturn().GetAsyncEnumerator())
+            await using (IAsyncEnumerator<int> enumerator = AwaitAndYieldReturn().GetAsyncEnumerator())
             {
                 while (await enumerator.MoveNextAsync())
                 {
-                    var item = enumerator.Current;
+                    int item = enumerator.Current;
                     Console.WriteLine($"Got {item}");
                 }
             }
@@ -110,14 +115,14 @@ namespace Demos
         {
             // Handle the paging only in this function.
             // Other functions don't get polluted with paging logic.
-            const int PageSize = 5;
+            const int pageSize = 5;
             int offset = 0;
 
             while (true)
             {
                 // Get next page of results.
                 string jsonString = await HttpClient.GetStringAsync(
-                    $"http://localhost:53198/api/values?offset={offset}&limit={PageSize}");
+                    $"http://localhost:53198/api/values?offset={offset}&limit={pageSize}");
 
                 // Produce them for our consumer.
                 int[] results = JsonConvert.DeserializeObject<int[]>(jsonString);
@@ -125,11 +130,11 @@ namespace Demos
                     yield return result;
 
                 // If this is the last page, then stop.
-                if (results.Length != PageSize)
+                if (results.Length != pageSize)
                     break;
 
                 // Index to the next page.
-                offset += PageSize;
+                offset += pageSize;
             }
         }
 

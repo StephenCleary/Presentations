@@ -49,7 +49,7 @@ namespace Demos
             Console.WriteLine("Done.");
         }
 
-        #region EnumeratorBlocks
+        #region IteratorBlocks
         static void YieldReturnMain()
         {
             foreach (int item in YieldReturn())

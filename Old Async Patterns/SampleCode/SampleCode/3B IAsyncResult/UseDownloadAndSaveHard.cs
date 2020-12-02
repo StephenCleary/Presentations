@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.ExceptionServices;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace SampleCode._3B_IAsyncResult
@@ -17,68 +18,85 @@ namespace SampleCode._3B_IAsyncResult
             _saveToDatabase = saveToDatabase;
         }
 
-        public IAsyncResult BeginDownloadAndSave(AsyncCallback callback, object state)
+        public IAsyncResult BeginDownloadAndSave(AsyncCallback callback, object userState)
         {
-            var localState = new State
-            {
-                TaskCompletionSource = new TaskCompletionSource<object>(state),
-            };
-
-            _downloadFromInternet1.BeginDownload(ar =>
-            {
-                var localState = (State) ar.AsyncState;
-                try
-                {
-                    localState!.Data1 = _downloadFromInternet1.EndDownload(ar);
-                }
-                catch (Exception exception)
-                {
-                    localState!.TaskCompletionSource.TrySetException(exception);
-                    return;
-                }
-
-                Continue(localState);
-            }, localState);
-
-            _downloadFromInternet2.BeginDownload(ar =>
-            {
-                var localState = (State)ar.AsyncState;
-                try
-                {
-                    localState!.Data2 = _downloadFromInternet2.EndDownload(ar);
-                }
-                catch (Exception exception)
-                {
-                    localState!.TaskCompletionSource.TrySetException(exception);
-                    return;
-                }
-
-                Continue(localState);
-            }, localState);
-
+            var localState = new State(userState);
+            _downloadFromInternet1.BeginDownload(Download1Callback, localState);
+            _downloadFromInternet2.BeginDownload(Download2Callback, localState);
             return localState.TaskCompletionSource.Task;
         }
 
-        private void Continue(State state)
+        private void Download1Callback(IAsyncResult ar)
         {
-            if (!state.HasData1 || !state.HasData2)
-                return;
-
-            _saveToDatabase.BeginSave(state.Data1 + state.Data2, ar =>
+            var localState = (State)ar.AsyncState;
+            string data1;
+            try
             {
-                var localState = (State) ar.AsyncState;
-                try
-                {
-                    _saveToDatabase.EndSave(ar);
-                }
-                catch (Exception exception)
-                {
-                    localState!.TaskCompletionSource.TrySetException(exception);
-                    return;
-                }
+                data1 = _downloadFromInternet1.EndDownload(ar);
+            }
+            catch (Exception exception)
+            {
+                localState!.TaskCompletionSource.TrySetException(exception);
+                return;
+            }
 
-                localState!.TaskCompletionSource.TrySetResult(null);
-            }, state);
+            bool readyToWrite;
+            lock (localState)
+            {
+                localState.Data1 = data1;
+                localState.HasData1 = true;
+                readyToWrite = localState.HasData1 && localState.HasData2;
+            }
+
+            if (readyToWrite)
+                SaveResults(localState);
+        }
+
+        private void Download2Callback(IAsyncResult ar)
+        {
+            var localState = (State)ar.AsyncState;
+            string data2;
+            try
+            {
+                data2 = _downloadFromInternet2.EndDownload(ar);
+            }
+            catch (Exception exception)
+            {
+                localState!.TaskCompletionSource.TrySetException(exception);
+                return;
+            }
+
+            bool readyToWrite;
+            lock (localState)
+            {
+                localState.Data2 = data2;
+                localState.HasData2 = true;
+                readyToWrite = localState.HasData1 && localState.HasData2;
+            }
+
+            if (readyToWrite)
+                SaveResults(localState);
+        }
+
+        private void SaveResults(State state)
+        {
+            _saveToDatabase.BeginSave(state.Data1 + state.Data2, SaveCallback, state);
+        }
+
+        private void SaveCallback(IAsyncResult ar)
+        {
+            var localState = (State)ar.AsyncState;
+            try
+            {
+                _saveToDatabase.EndSave(ar);
+            }
+            catch (Exception exception)
+            {
+                localState!.TaskCompletionSource.TrySetException(exception);
+                return;
+            }
+
+            localState!.TaskCompletionSource.TrySetResult(null);
         }
 
         public void EndDownloadAndSave(IAsyncResult result)
@@ -90,6 +108,8 @@ namespace SampleCode._3B_IAsyncResult
 
         private sealed class State
         {
+            public State(object userState) => TaskCompletionSource = new TaskCompletionSource<object>(userState);
+
             // Results
             public string Data1 { get; set; }
             public string Data2 { get; set; }
@@ -98,7 +118,8 @@ namespace SampleCode._3B_IAsyncResult
             public bool HasData1 { get; set; }
             public bool HasData2 { get; set; }
 
-            public TaskCompletionSource<object> TaskCompletionSource { get; set; }
+            // Completion
+            public TaskCompletionSource<object> TaskCompletionSource { get; }
         }
 
         //public void DownloadAndSave()

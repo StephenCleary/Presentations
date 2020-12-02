@@ -18,49 +18,64 @@ namespace SampleCode._4_Futures
         public Task DownloadAndSaveAsync()
         {
             var state = new State();
-            var tcs = new TaskCompletionSource<object>();
-            _downloadFromInternet1.DownloadAsync().ContinueWith(t => DownloadContinuation(t, true));
-            _downloadFromInternet2.DownloadAsync().ContinueWith(t => DownloadContinuation(t, false));
-            return tcs.Task;
-
-            void DownloadContinuation(Task<string> task, bool isForData1)
-            {
-                if (task.Exception != null)
-                {
-                    tcs.TrySetException(task.Exception.InnerExceptions);
-                    return;
-                }
-
-                bool readyToWrite;
-                lock (state)
-                {
-                    if (isForData1)
-                    {
-                        state.Data1 = task.Result;
-                        state.HasData1 = true;
-                    }
-                    else
-                    {
-                        state.Data2 = task.Result;
-                        state.HasData2 = true;
-                    }
-
-                    readyToWrite = state.HasData1 && state.HasData2;
-                }
-
-                if (!readyToWrite)
-                    return;
-
-                _saveToDatabase.SaveAsync(state.Data1 + state.Data2).ContinueWith(t =>
-                {
-                    if (t.Exception != null)
-                        tcs.TrySetException(t.Exception.InnerExceptions);
-                    else
-                        tcs.TrySetResult(null);
-                });
-            }
+            _downloadFromInternet1.DownloadAsync().ContinueWith(t => Download1Continuation(t, state));
+            _downloadFromInternet2.DownloadAsync().ContinueWith(t => Download2Continuation(t, state));
+            return state.TaskCompletionSource.Task;
         }
-        
+
+        private void Download1Continuation(Task<string> t, State state)
+        {
+            if (t.Exception != null)
+            {
+                state.TaskCompletionSource.TrySetException(t.Exception.InnerExceptions);
+                return;
+            }
+
+            bool readyToWrite;
+            lock (state)
+            {
+                state.Data1 = t.Result;
+                state.HasData1 = true;
+                readyToWrite = state.HasData1 && state.HasData2;
+            }
+
+            if (readyToWrite)
+                SaveResults(state);
+        }
+
+        private void Download2Continuation(Task<string> t, State state)
+        {
+            if (t.Exception != null)
+            {
+                state.TaskCompletionSource.TrySetException(t.Exception.InnerExceptions);
+                return;
+            }
+
+            bool readyToWrite;
+            lock (state)
+            {
+                state.Data2 = t.Result;
+                state.HasData2 = true;
+                readyToWrite = state.HasData1 && state.HasData2;
+            }
+
+            if (readyToWrite)
+                SaveResults(state);
+        }
+
+        private void SaveResults(State state)
+        {
+            _saveToDatabase.SaveAsync(state.Data1 + state.Data2).ContinueWith(t => SaveContinuation(t, state));
+        }
+
+        private void SaveContinuation(Task t, State state)
+        {
+            if (t.Exception != null)
+                state.TaskCompletionSource.TrySetException(t.Exception.InnerExceptions);
+            else
+                state.TaskCompletionSource.TrySetResult(null);
+        }
+
         private sealed class State
         {
             // Results
@@ -70,6 +85,9 @@ namespace SampleCode._4_Futures
             // State
             public bool HasData1 { get; set; }
             public bool HasData2 { get; set; }
+
+            // Completion
+            public TaskCompletionSource<object> TaskCompletionSource { get; } = new TaskCompletionSource<object>();
         }
 
         //public void DownloadAndSave()

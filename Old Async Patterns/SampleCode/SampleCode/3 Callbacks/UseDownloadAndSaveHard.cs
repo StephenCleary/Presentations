@@ -17,72 +17,74 @@ namespace SampleCode._3_Callbacks
 
         public void DownloadAndSave(Action<Exception> callback)
         {
-            var state = new State();
+            var state = new State(callback);
+            _downloadFromInternet1.DownloadAsync((ex, data1) => Download1Callback(ex, data1, state));
+            _downloadFromInternet2.DownloadAsync((ex, data2) => Download2Callback(ex, data2, state));
+        }
 
-            _downloadFromInternet1.DownloadAsync((ex, data1) =>
+        private void Download1Callback(Exception ex, string data1, State state)
+        {
+            if (ex != null)
             {
-                if (ex != null)
-                {
-                    lock (state)
-                    {
-                        if (state.IsCompleted)
-                            return;
-                        state.IsCompleted = true;
-                    }
-
-                    callback(ex);
-                    return;
-                }
-
-                bool readyToWrite = false;
                 lock (state)
                 {
-                    state.Data1 = data1;
-                    state.HasData1 = true;
-                    if (state.HasData2)
-                        readyToWrite = true;
+                    if (state.IsCompleted)
+                        return;
+                    state.IsCompleted = true;
                 }
 
-                if (readyToWrite)
-                    BeginWriting();
-            });
-
-            _downloadFromInternet2.DownloadAsync((ex, data2) =>
-            {
-                if (ex != null)
-                {
-                    lock (state)
-                    {
-                        if (state.IsCompleted)
-                            return;
-                        state.IsCompleted = true;
-                    }
-
-                    callback(ex);
-                    return;
-                }
-
-                bool readyToWrite = false;
-                lock (state)
-                {
-                    state.Data2 = data2;
-                    state.HasData2 = true;
-                    if (state.HasData1)
-                        readyToWrite = true;
-                }
-
-                if (readyToWrite)
-                    BeginWriting();
-            });
-
-            void BeginWriting()
-            {
-                _saveToDatabase.SaveAsync(state.Data1 + state.Data2, callback);
+                state.Callback(ex);
+                return;
             }
+
+            bool readyToWrite;
+            lock (state)
+            {
+                state.Data1 = data1;
+                state.HasData1 = true;
+                readyToWrite = state.HasData1 && state.HasData2;
+            }
+
+            if (readyToWrite)
+                SaveResults(state);
+        }
+
+        private void Download2Callback(Exception ex, string data2, State state)
+        {
+            if (ex != null)
+            {
+                lock (state)
+                {
+                    if (state.IsCompleted)
+                        return;
+                    state.IsCompleted = true;
+                }
+
+                state.Callback(ex);
+                return;
+            }
+
+            bool readyToWrite;
+            lock (state)
+            {
+                state.Data2 = data2;
+                state.HasData2 = true;
+                readyToWrite = state.HasData1 && state.HasData2;
+            }
+
+            if (readyToWrite)
+                SaveResults(state);
+        }
+
+        private void SaveResults(State state)
+        {
+            _saveToDatabase.SaveAsync(state.Data1 + state.Data2, state.Callback);
         }
 
         private sealed class State
         {
+            public State(Action<Exception> callback) => Callback = callback;
+
             // Results
             public string Data1 { get; set; }
             public string Data2 { get; set; }
@@ -91,6 +93,9 @@ namespace SampleCode._3_Callbacks
             public bool HasData1 { get; set; }
             public bool HasData2 { get; set; }
             public bool IsCompleted { get; set; }
+
+            // Completion
+            public Action<Exception> Callback { get; }
         }
 
         //public void DownloadAndSave()

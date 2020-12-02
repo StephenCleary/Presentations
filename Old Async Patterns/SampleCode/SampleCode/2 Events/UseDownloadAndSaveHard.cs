@@ -86,7 +86,7 @@ namespace SampleCode._2_Events
         {
             _saveToDatabase.SaveCompleted += (_, args) =>
             {
-                DownloadAndSaveCompleted?.Invoke(this, new AsyncCompletedEventArgs(args.Error, false, null));
+                DownloadAndSaveCompleted?.Invoke(this, args);
             };
 
             _saveToDatabase.SaveAsync(state.Data1 + state.Data2);

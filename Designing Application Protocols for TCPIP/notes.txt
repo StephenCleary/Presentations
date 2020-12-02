@@ -1,0 +1,8 @@
+Probably not:
+- OSI stack: ideal and real-world
+- Security
+  - MITM - TLS
+    - In theory, certificates can be used on either side (or both sides).
+    - In reality, not all crypto libraries support that.
+  - Denial of Service
+    - Depends heavily on protocol design

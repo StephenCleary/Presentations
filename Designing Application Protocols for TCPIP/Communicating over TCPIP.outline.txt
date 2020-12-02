@@ -17,3 +17,4 @@
 - The importance of logging.
 - Why production-quality socket code is usually asynchronous.
 - Overview of socket-level operations.
+- Tools to help catch incorrect assumptions.

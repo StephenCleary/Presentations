@@ -1,0 +1,10 @@
+2010-08: F# 2.0
+2012-08: C# 5.0 / VB 11.0
+2014-03: Hack (PHP)
+2015-03: Dart 1.9
+2015-09: TypeScript 1.6
+2015-09: Python 3.5
+2017-06: JavaScript ECMAScript 2017
+2018-09: Perl 5.16 (Future-AsyncAwait module)
+2019-11: Rust 1.39
+2020-??: C++ 20

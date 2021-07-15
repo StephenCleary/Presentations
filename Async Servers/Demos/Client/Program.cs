@@ -15,6 +15,9 @@ namespace Client
         {
             try
             {
+                Console.WriteLine("Press any key to begin.");
+                Console.ReadKey();
+
                 MainAsync().Wait();
             }
             catch (Exception ex)

@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    image: mcr.microsoft.com/devcontainers/dotnet:0-7.0
+    network_mode: service:seq
+    volumes:
+      - ../..:/workspaces:cached
+    command: sleep infinity
+
+  seq:
+    image: datalust/seq:latest
+    restart: unless-stopped
+    environment:
+      - ACCEPT_EULA=Y
+    volumes:
+      - log-data:/data
+
+volumes:
+  log-data:

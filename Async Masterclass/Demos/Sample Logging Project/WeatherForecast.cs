@@ -1,4 +1,4 @@
-namespace _2023_ThatConf;
+namespace Log;
 
 public class WeatherForecast
 {

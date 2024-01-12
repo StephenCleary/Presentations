@@ -1,4 +1,4 @@
-namespace _2023_ThatConf.Services;
+namespace Log.Services;
 
 public class WeatherForecastService
 {

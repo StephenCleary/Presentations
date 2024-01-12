@@ -1,7 +1,7 @@
-using _2023_ThatConf.Services;
+using Log.Services;
 using Microsoft.AspNetCore.Mvc;
 
-namespace _2023_ThatConf.Controllers;
+namespace Log.Controllers;
 
 [ApiController]
 [Route("[controller]")]

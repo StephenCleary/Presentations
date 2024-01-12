@@ -1,4 +1,4 @@
-using _2023_ThatConf.Services;
+using Log.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 

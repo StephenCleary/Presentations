@@ -7,7 +7,7 @@ async Task Main()
 	DisplayLocal();
 	local.Value = 13;
 	DisplayLocal();
-	// await Task.Run(() => DisplayLocal());
+	//await Task.Run(() => DisplayLocal());
 	
 	await MethodAsync();
 	DisplayLocal();

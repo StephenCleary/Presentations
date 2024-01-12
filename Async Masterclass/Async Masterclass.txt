@@ -1,0 +1,11 @@
+= Async Masterclass
+
+You've mastered async and await, but you find you need more powerful tools. This is how to build them.
+
+Tired of reading articles about async that just don't go deep enough? Here you go. This is the async masterclass. There are no breakfast food analogies here. Except bacon, because bacon is awesome. Bacon.
+
+Forget Task. We'll be learning ValueTask. And IAsyncDisposable. And AsyncLocal < T > . Oh, and asynchronous queues - time to learn some Channels. Let's throw in asynchronous synchronization primitives. And I mean building those - seeing how they actually work - not just using them. This ain't your momma's SemaphoreSlim; it's time to build your *own* asynchronous "pause" primitive with TaskCompletionSource < T > . Speaking of TCS, we'll also cover the dictionary completion technique. Let's build our own AsyncLazy < T > , too. Maybe we'll even tackle asynchronous caching and the challenges that come with that (spoiler: we will).
+
+It sounds like a random assortment of topics, but each of these skills are valuable as soon as you move from basic async/await into real-world complexity. By the end of this masterclass, you'll be equipped to take your async to the next level!
+
+Mmm... bacon...

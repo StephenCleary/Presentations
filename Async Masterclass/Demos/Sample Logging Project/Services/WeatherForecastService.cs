@@ -11,8 +11,8 @@ public class WeatherForecastService
     {
         using var _ = _logger.BeginScope(new Dictionary<string, object>() { { "DateRequested", date } });
 
-        // if (date == DateOnly.FromDateTime(DateTime.Now.AddDays(3)))
-        //     throw new InvalidOperationException("Oh no! No temperature available!");
+        if (date == DateOnly.FromDateTime(DateTime.Now.AddDays(3)))
+            throw new InvalidOperationException("Oh no! No temperature available!");
 
         var temperature = Random.Shared.Next(-20, 55);
         _logger.LogInformation("Forecast result: {temperature}", temperature);

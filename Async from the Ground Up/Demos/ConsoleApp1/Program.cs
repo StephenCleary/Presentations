@@ -11,4 +11,8 @@ async Task<int> DownloadSomethingAsync()
 	//string response = await responseTask;
 	//int result = response.Length;
 	//return result;
+
+	// await == "asynchronous wait"
+	// async/await == type wrapper / type unwrapper
+	// Implemented using callbacks (call stack inverts when completing)
 }

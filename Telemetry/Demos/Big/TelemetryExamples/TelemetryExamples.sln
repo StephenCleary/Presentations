@@ -5,6 +5,8 @@ VisualStudioVersion = 17.10.34928.147
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{30D3970D-97AC-4D5E-A47D-5F4509AFCD53}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspireServiceDefaults", "AspireServiceDefaults\AspireServiceDefaults.csproj", "{A8FA8362-40EC-4834-9218-B17C56932255}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{30D3970D-97AC-4D5E-A47D-5F4509AFCD53}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30D3970D-97AC-4D5E-A47D-5F4509AFCD53}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30D3970D-97AC-4D5E-A47D-5F4509AFCD53}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8FA8362-40EC-4834-9218-B17C56932255}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8FA8362-40EC-4834-9218-B17C56932255}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8FA8362-40EC-4834-9218-B17C56932255}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8FA8362-40EC-4834-9218-B17C56932255}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

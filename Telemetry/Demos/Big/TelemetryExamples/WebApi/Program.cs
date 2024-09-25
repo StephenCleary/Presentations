@@ -4,10 +4,10 @@ using WebApi.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Use .NET Aspire telemetry defaults.
-builder.ConfigureOpenTelemetry();
+//builder.ConfigureOpenTelemetry();
 
 // Export to local OTLP.
-builder.Services.AddOpenTelemetry().UseOtlpExporter();
+//builder.Services.AddOpenTelemetry().UseOtlpExporter();
 
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddProblemDetails();

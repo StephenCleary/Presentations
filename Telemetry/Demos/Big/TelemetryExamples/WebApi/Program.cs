@@ -4,6 +4,7 @@ using WebApi.Services;
 var builder = WebApplication.CreateBuilder(args);
 
 // Use .NET Aspire telemetry defaults.
+// Hmmm... I wonder what this does?
 //builder.ConfigureOpenTelemetry();
 
 // Export to local OTLP.

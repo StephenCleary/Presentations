@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Nito.Logging" Version="1.0.1" />
+    <PackageReference Include="Scrutor" Version="5.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\AspireServiceDefaults\AspireServiceDefaults.csproj" />
   </ItemGroup>
 

@@ -9,3 +9,5 @@ We'll also cover techniques for distributed tracing, including the standard span
 Throughout this talk, we'll cover common visualization tools that are compatible with your newly-instrumented applications. Azure Application Insights will be included, along with free OSS solutions.
 
 By the end of this talk, you'll have concrete ideas to take back to your day job, earning you the respect and heartfelt thanks of anyone who has to track down issues in your website or client application!
+
+TODO: demo BeginDataScope. Note: BeginScope is built-in; BeginDataScope is not.

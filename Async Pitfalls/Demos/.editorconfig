@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# IDE0062: Make local function 'static'
+dotnet_diagnostic.IDE0062.severity = none

@@ -1,0 +1,20 @@
+# sudo cp demo.service /etc/systemd/system && sudo systemctl daemon-reload
+# sudo systemctl start demo.service
+# systemctl status demo.service
+# sudo systemctl stop demo.service
+# journalctl -u demo.service
+
+# sudo journalctl --vacuum-time=1s
+
+[Unit]
+Description=demo
+After=network.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+User=stephen
+ExecStart=/mnt/d/Code/Presentations/BackgroundServices/BackgroundServiceDemos/Demo1/bin/Debug/net9.0/Demo1
+
+[Install]
+WantedBy=multi-user.target

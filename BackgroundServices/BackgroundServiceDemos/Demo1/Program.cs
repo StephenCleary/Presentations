@@ -1,11 +1,4 @@
-// Work around FileWatcher bug when running as systemd. https://github.com/dotnet/runtime/issues/113855
-var config = new ConfigurationManager();
-config.AddInMemoryCollection(new Dictionary<string, string?>() { ["hostBuilder:reloadConfigOnChange"] = "false" });
-var builder = Host.CreateApplicationBuilder(new HostApplicationBuilderSettings
-{
-	Args = args,
-	Configuration = config,
-});
+var builder = Host.CreateApplicationBuilder(args);
 
 builder.Services.AddHostedService<Worker>();
 

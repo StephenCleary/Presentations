@@ -8,13 +8,11 @@ namespace Demo3;
 // docker run --rm -it -p 5672:5672 -p 15672:15672 rabbitmq:4-management
 // http://localhost:15672
 
-public class QueueWorker : FixedWorkingBackgroundService2Ex
+public class QueueWorker(ILogger<QueueWorker> logger,
+	IHostApplicationLifetime hostApplicationLifetime,
+	IServiceScopeFactory serviceScopeFactory) :
+	FixedWorkingBackgroundService2Ex(logger, hostApplicationLifetime)
 {
-	public QueueWorker(ILogger<QueueWorker> logger, IHostApplicationLifetime hostApplicationLifetime)
-		: base(logger, hostApplicationLifetime)
-	{
-	}
-
 	protected override async Task DoExecuteAsync(CancellationToken stoppingToken)
 	{
 		await using var connection = await new ConnectionFactory().CreateConnectionAsync(stoppingToken);
@@ -29,21 +27,29 @@ public class QueueWorker : FixedWorkingBackgroundService2Ex
 		var consumer = new AsyncEventingBasicConsumer(channel);
 		consumer.ReceivedAsync += async (_, args) =>
 		{
+			// (only necessary because RabbitMQ gives us an awkward event API instead of an async stream)
+			using var queueLoggingScope = Logger.BeginDataScope(
+				("queue", "demo"),
+				("queue_server", connection.Endpoint.HostName));
+
 			using var messageLoggingScope = Logger.BeginDataScope(("message_id", args.BasicProperties.MessageId));
+			await using var scope = serviceScopeFactory.CreateAsyncScope();
 
 			var message = Encoding.UTF8.GetString(args.Body.Span);
-			await HandleMessage(message);
+			await HandleMessage(scope.ServiceProvider, message);
 		};
 
-		await channel.BasicConsumeAsync("demo", autoAck: false, consumer, stoppingToken);
-		Logger.LogInformation("Listening for messages...");
+		var consumerTag = await channel.BasicConsumeAsync("demo", autoAck: false, consumer, stoppingToken);
+		Logger.LogInformation("Listening for messages as {consumer}...", consumerTag);
 
 		await Task.Delay(Timeout.InfiniteTimeSpan, stoppingToken);
 	}
 
-	private Task HandleMessage(string message)
+	private static Task HandleMessage(IServiceProvider serviceProvider, string message)
 	{
-		Logger.LogInformation("Received {message}", message);
+		// Use the provider to resolve services that may have a per-message lifetime.
+		var localLogger = serviceProvider.GetRequiredService<ILogger<QueueWorker>>();
+		localLogger.LogInformation("Received {message}", message);
 		return Task.CompletedTask;
 	}
 }

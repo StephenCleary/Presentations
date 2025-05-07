@@ -15,6 +15,10 @@ public abstract class FixedWorkingBackgroundService2Ex(
 			await DoExecuteAsync(stoppingToken).ConfigureAwait(false);
 			Logger.LogInformation("Worker stopped.");
 		}
+		catch (OperationCanceledException)
+		{
+			Logger.LogInformation("Worker stopped.");
+		}
 		catch (Exception ex)
 		{
 			Logger.LogError(ex, "Worker failed.");

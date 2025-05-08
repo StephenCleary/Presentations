@@ -36,7 +36,7 @@ public class QueueWorker(ILogger<QueueWorker> logger,
 			await using var scope = serviceScopeFactory.CreateAsyncScope();
 
 			var message = Encoding.UTF8.GetString(args.Body.Span);
-			await HandleMessage(scope.ServiceProvider, message);
+			await HandleMessageAsync(scope.ServiceProvider, message);
 		};
 
 		var consumerTag = await channel.BasicConsumeAsync("demo", autoAck: false, consumer, stoppingToken);
@@ -45,7 +45,9 @@ public class QueueWorker(ILogger<QueueWorker> logger,
 		await Task.Delay(Timeout.InfiniteTimeSpan, stoppingToken);
 	}
 
-	private static Task HandleMessage(IServiceProvider serviceProvider, string message)
+	// Consider also passing CancellationToken.
+	// This example assumes we want to complete processing once we've started.
+	private static Task HandleMessageAsync(IServiceProvider serviceProvider, string message)
 	{
 		// Use the provider to resolve services that may have a per-message lifetime.
 		var localLogger = serviceProvider.GetRequiredService<ILogger<QueueWorker>>();

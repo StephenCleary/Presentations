@@ -2,7 +2,8 @@ using Demo3;
 using Nito.Logging;
 
 var builder = Host.CreateApplicationBuilder(args);
-builder.Services.AddHostedService<QueueWorker>();
+//builder.Services.AddHostedService<QueueWorker>();
+builder.Services.AddHostedService<PeriodWorker>();
 
 builder.Services.AddLogging(logging =>
 {

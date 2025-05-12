@@ -20,6 +20,7 @@ public class WeatherForecastController : ControllerBase
 	public IEnumerable<WeatherForecast> Get()
 	{
 		var today = DateOnly.FromDateTime(DateTime.Now);
+		// [Demo 3.2]
 		//using var _ = _logger.BeginScope(new Dictionary<string, object>() { { "User", "Demo" } });
 		return Enumerable.Range(1, 5)
 			.Select(index => _service.GetWeatherForecast(today.AddDays(index)))

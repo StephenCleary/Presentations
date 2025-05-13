@@ -2,6 +2,11 @@ using Nito.Logging;
 using OpenTelemetry;
 using WebApi.Services;
 
+// Avoid delays reporting telemtry (only do this for demo code).
+Environment.SetEnvironmentVariable("OTEL_METRIC_EXPORT_INTERVAL", "1000");
+Environment.SetEnvironmentVariable("OTEL_BSP_SCHEDULE_DELAY", "1000");
+Environment.SetEnvironmentVariable("OTEL_BLRP_SCHEDULE_DELAY", "1000");
+
 var builder = WebApplication.CreateBuilder(args);
 
 // [Demo 1.1]

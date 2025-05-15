@@ -2,8 +2,10 @@
   <Namespace>System.Threading.Tasks</Namespace>
 </Query>
 
-void Main()
+async Task Main()
 {
+	await foreach (var item in SomeMethod())
+		item.Dump("Yielded item");
 }
 
 async IAsyncEnumerable<int> SomeMethod()

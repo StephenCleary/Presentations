@@ -20,9 +20,4 @@ async Task Main()
 
 sealed class AsyncLazy<T>
 {
-	private readonly Lazy<Task<T>> _lazy;
-	
-	public AsyncLazy(Func<Task<T>> func) => _lazy = new(func);
-	
-	public TaskAwaiter<T> GetAwaiter() => _lazy.Value.GetAwaiter();
 }

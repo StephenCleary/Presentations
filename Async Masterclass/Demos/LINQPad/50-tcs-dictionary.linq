@@ -18,7 +18,8 @@ sealed class TcsDictionary
 	public Task<Response> Add(Guid requestId)
 	{
 		var tcs = new TaskCompletionSource<Response>();
-		_dictionary.AddOrUpdate(requestId, _ => tcs, (_, _) => throw new InvalidOperationException("Multiple request ids"));
+		_dictionary.AddOrUpdate(requestId, _ => tcs,
+			(_, _) => throw new InvalidOperationException("Multiple request ids"));
 		return tcs.Task;
 	}
 	
@@ -36,5 +37,5 @@ sealed class TcsDictionary
 		return tcs.TrySetException(exception);
 	}
 
-	// Also useful: CompleteAll / Dispose
+	// Also useful: CancelAll / Dispose
 }

@@ -17,7 +17,7 @@ sealed class TcsDictionary
 	
 	public Task<Response> Add(Guid requestId)
 	{
-		var tcs = new TaskCompletionSource<Response>();
+		var tcs = new TaskCompletionSource<Response>(TaskCreationOptions.RunContinuationsAsynchronously);
 		_dictionary.AddOrUpdate(requestId, _ => tcs,
 			(_, _) => throw new InvalidOperationException("Multiple request ids"));
 		return tcs.Task;

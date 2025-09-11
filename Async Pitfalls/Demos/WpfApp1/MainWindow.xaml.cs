@@ -12,9 +12,7 @@ public partial class MainWindow : Window
 	private async Task DoWorkAsync()
 	{
 		ListBox.Items.Add("Hi!");
-		var task1 = Task.Delay(TimeSpan.FromSeconds(2));
-		var task2 = Task.Delay(TimeSpan.FromSeconds(2));
-		await Task.WhenAll(task1, task2);
+		await Task.Delay(TimeSpan.FromSeconds(2));
 		ListBox.Items.Add("Still here!");
 	}
 

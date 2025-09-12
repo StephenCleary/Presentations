@@ -5,13 +5,10 @@ namespace WpfApp1;
 
 public class MoreExamples
 {
+    private static readonly HttpClient _httpClient = new HttpClient();
+
     #region async void
     public static async void ExampleAsyncVoid()
-    {
-        await Task.Delay(1000);
-    }
-
-    public static async Task ExampleAsyncTask()
     {
         await Task.Delay(1000);
     }
@@ -28,13 +25,18 @@ public class MoreExamples
     {
         // Same problem with Wait() or Result.
         ExampleAsyncTask().GetAwaiter().GetResult();
+
+        static async Task ExampleAsyncTask()
+        {
+            await Task.Delay(1000);
+        }
     }
     #endregion
 
     #region Fire and forget
     public static void FireAndForget()
     {
-        _ = ExampleAsyncTask();
+        _ = _httpClient.PostAsync("https://example.com/send_email", null);
         // Task is discarded - ignored!
     }
     #endregion
@@ -42,7 +44,7 @@ public class MoreExamples
     #region Dangerous Task methods
     public static void ContinueWithIsDangerous()
     {
-        Task task = ExampleAsyncTask();
+        Task task = Task.Delay(1000);
         task.ContinueWith(t =>
         {
             Console.WriteLine("Completed");
@@ -131,8 +133,12 @@ public class MoreExamples
     #endregion
 
     #region Processing tasks as they complete
-    public static async Task DumpAsTheyComplete(List<Task<string>> tasks)
+    public static async Task DumpAsTheyComplete(List<string> urls)
     {
+        List<Task<string>> tasks = urls
+            .Select(url => _httpClient.GetStringAsync(url))
+            .ToList();
+
         while (tasks.Count > 0)
         {
             Task<string> completedTask = await Task.WhenAny(tasks);
@@ -142,8 +148,12 @@ public class MoreExamples
     }
 
     // If you must: Task.WhenEach is in .NET 9
-    public static async Task DumpAsTheyCompleteWithWhenEach(List<Task<string>> tasks)
+    public static async Task DumpAsTheyCompleteWithWhenEach(List<string> urls)
     {
+        List<Task<string>> tasks = urls
+            .Select(url => _httpClient.GetStringAsync(url))
+            .ToList();
+
         await foreach (Task<string> completedTask in Task.WhenEach(tasks))
         {
             Console.WriteLine(await completedTask);
@@ -151,8 +161,12 @@ public class MoreExamples
     }
 
     // Or AsyncEx has OrderByCompletion for all supported .NET versions
-    public static async Task DumpAsTheyCompleteWithAsyncEx(List<Task<string>> tasks)
+    public static async Task DumpAsTheyCompleteWithAsyncEx(List<string> urls)
     {
+        List<Task<string>> tasks = urls
+            .Select(url => _httpClient.GetStringAsync(url))
+            .ToList();
+
         foreach (Task<string> completedTask in tasks.OrderByCompletion())
         {
             Console.WriteLine(await completedTask);
@@ -162,12 +176,12 @@ public class MoreExamples
 
     #region Unnecessary callbacks
     // More common in Node.js
-    public static async Task UnnecessaryCallbacks(Action<string> onResult, Action<Exception> onError)
+    public static async Task UnnecessaryCallbacks(
+        Action<string> onResult, Action<Exception> onError)
     {
-        using var client = new HttpClient();
         try
         {
-            string result = await client.GetStringAsync("https://www.google.com");
+            string result = await _httpClient.GetStringAsync("https://www.google.com");
             onResult(result);
         }
         catch (Exception ex)

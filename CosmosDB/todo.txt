@@ -1,5 +1,0 @@
-Global Secondary Indexes
-- Asynchronous replication.
-- Read-only.
-- Public preview as of Build 2025.
-https://devblogs.microsoft.com/cosmosdb/boost-query-performance-with-global-secondary-indexes-in-azure-cosmos-db/

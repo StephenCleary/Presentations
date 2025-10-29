@@ -176,8 +176,7 @@ public class MoreExamples
 
     #region Unnecessary callbacks
     // More common in Node.js
-    public static async Task UnnecessaryCallbacks(
-        Action<string> onResult, Action<Exception> onError)
+    public static async Task UnnecessaryCallbacks(Action<string> onResult, Action<Exception> onError)
     {
         try
         {

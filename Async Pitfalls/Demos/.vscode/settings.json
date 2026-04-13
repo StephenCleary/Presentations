@@ -1,0 +1,21 @@
+{
+    "presentation-mode.configBackup": {
+        "editor.fontSize": "undefined",
+        "editor.matchBrackets": "undefined",
+        "editor.minimap.enabled": "undefined",
+        "editor.scrollbar.verticalScrollbarSize": "undefined",
+        "workbench.activityBar.visible": "undefined",
+        "workbench.statusBar.visible": "undefined",
+        "workbench.colorTheme": "undefined",
+        "window.zoomLevel": "undefined",
+        "gitlens.currentLine.enabled": "undefined",
+        "editor.codeLens": "undefined",
+        "editor.lightbulb.enabled": "undefined",
+        "breadcrumbs.enabled": "undefined",
+        "zenMode.centerLayout": "undefined",
+        "zenMode.showTabs": "undefined",
+        "github.copilot.enable": "undefined",
+        "scm.diffDecorations": "undefined",
+        "editor.cursorBlinking": "undefined"
+    }
+}

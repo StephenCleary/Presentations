@@ -1,0 +1,9 @@
+SDD London May
+  30 2025-05-13 SDD 2025 London: Become a logging hero! https://sddvault.s3.amazonaws.com/assets/SDD_2025_schedule.pdf
+  30 2025-05-13 SDD 2025 London: Background services in .NET https://sddvault.s3.amazonaws.com/assets/SDD_2025_schedule.pdf
+  50 2025-05-15 SDD 2025 London: Async Masterclass https://sddvault.s3.amazonaws.com/assets/SDD_2025_schedule.pdf
+NDC 2025 Copenhagen Sept
+  200 2025-09-12 NDC 2025 Copenhagen: Avoiding common pitfalls with async/await https://www.youtube.com/watch?v=a_O53k9mexk
+Techorama 2025 Netherlands Oct-Nov
+  80 2025-10-28 Techorama 2025 Netherlands: CosmosDB in the real world https://www.techorama.nl/agenda/session/cosmosdb-in-the-real-world/
+  200 2025-10-29 Techorama 2025 Netherlands: Avoiding common pitfalls with async/await https://www.techorama.nl/agenda/session/avoiding-common-pitfalls-with-asyncawait/

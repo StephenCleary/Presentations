@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="AspireServiceDefaults/AspireServiceDefaults.csproj" />
+  <Project Path="WebApi/WebApi.csproj" />
+</Solution>

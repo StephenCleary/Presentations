@@ -1,5 +1,6 @@
 <Solution>
   <Project Path="AspireServiceDefaults/AspireServiceDefaults.csproj" />
+  <Project Path="TelDemo.Backend/TelDemo.Backend.csproj" />
   <Project Path="TelDemo.Frontend/TelDemo.Frontend.csproj" />
   <Project Path="TelDemo.WebApi/TelDemo.WebApi.csproj" />
 </Solution>

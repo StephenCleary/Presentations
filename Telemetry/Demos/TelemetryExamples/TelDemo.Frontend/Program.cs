@@ -7,6 +7,7 @@ builder.Services.AddOpenTelemetry()
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
+builder.Services.AddSingleton<RabbitMqPublisherService>();
 builder.Services.AddHttpClient<WeatherApiClient>(client => client.BaseAddress = new Uri("http://localhost:5250/"));
 
 var app = builder.Build();

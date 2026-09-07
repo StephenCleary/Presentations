@@ -1,7 +1,4 @@
-﻿using System.Diagnostics;
-using System.Diagnostics.Metrics;
-
-namespace WebApi.Services;
+﻿namespace TelDemo.WebApi.Services;
 
 public class WeatherForecastService(ILogger<WeatherForecastService> logger)
 {
@@ -11,11 +8,11 @@ public class WeatherForecastService(ILogger<WeatherForecastService> logger)
 	];
 
     // [Demo 5]
-    //private static readonly Meter Meter = new("WebApi.WeatherForecast");
+    //private static readonly Meter Meter = new("TelDemo.WebApi.WeatherForecast");
     //private static readonly Counter<int> ForecastsGenerated = Meter.CreateCounter<int>("weather_forecasts_generated");
 
 	// [Demo 6]
-    //public static readonly ActivitySource ActivitySource = new("WebApi.WeatherForecast");
+    //public static readonly ActivitySource ActivitySource = new("TelDemo.WebApi.WeatherForecast");
 
     public WeatherForecast GetWeatherForecast(DateOnly date)
 	{

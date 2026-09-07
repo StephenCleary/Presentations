@@ -1,4 +1,4 @@
-namespace WebApi.Middleware;
+namespace TelDemo.WebApi.Middleware;
 
 public class FakeUserAuthenticationMiddleware(RequestDelegate next, ILogger<FakeUserAuthenticationMiddleware> logger)
 {

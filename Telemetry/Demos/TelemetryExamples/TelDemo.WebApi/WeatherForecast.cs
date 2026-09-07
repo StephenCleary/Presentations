@@ -1,4 +1,4 @@
-namespace WebApi;
+namespace TelDemo.WebApi;
 
 public class WeatherForecast
 {

@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Using Include="Microsoft.AspNetCore.Mvc" />
+    <Using Include="Nito.Logging" />
+    <Using Include="OpenTelemetry" />
+    <Using Include="System.Diagnostics" />
+    <Using Include="System.Diagnostics.Metrics" />
+    <Using Include="TelDemo.WebApi" />
+    <Using Include="TelDemo.WebApi.Middleware" />
+    <Using Include="TelDemo.WebApi.Services" />
+  </ItemGroup>
+    
+  <ItemGroup>
     <PackageReference Include="Nito.Logging" Version="2.0.2" />
   </ItemGroup>
 

@@ -1,8 +1,3 @@
-using Nito.Logging;
-using OpenTelemetry;
-using WebApi.Middleware;
-using WebApi.Services;
-
 // Avoid delays reporting telemtry (only do this for demo code).
 Environment.SetEnvironmentVariable("OTEL_METRIC_EXPORT_INTERVAL", "1000");
 Environment.SetEnvironmentVariable("OTEL_BSP_SCHEDULE_DELAY", "1000");
@@ -22,12 +17,12 @@ var builder = WebApplication.CreateBuilder(args);
 // [Demo 5]
 // Export our custom metrics to OTLP.
 //builder.Services.AddOpenTelemetry()
-//    .WithMetrics(metrics => metrics.AddMeter("WebApi.WeatherForecast"));
+//    .WithMetrics(metrics => metrics.AddMeter("TelDemo.*"));
 
 // [Demo 6]
 // Export our custom traces to OTLP.
 //builder.Services.AddOpenTelemetry()
-//    .WithTracing(tracing => tracing.AddSource("WebApi.WeatherForecast"));
+//    .WithTracing(tracing => tracing.AddSource("TelDemo.*"));
 
 // [Demo 4.2]
 //builder.Services.AddExceptionLoggingScopes();

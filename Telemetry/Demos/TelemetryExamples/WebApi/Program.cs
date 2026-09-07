@@ -10,7 +10,7 @@ Environment.SetEnvironmentVariable("OTEL_BLRP_SCHEDULE_DELAY", "1000");
 var builder = WebApplication.CreateBuilder(args);
 
 // [Demo 1.1]
-// Use .NET Aspire telemetry defaults.
+// Use Aspire telemetry defaults.
 // Hmmm... I wonder what this does?
 //builder.ConfigureOpenTelemetry();
 

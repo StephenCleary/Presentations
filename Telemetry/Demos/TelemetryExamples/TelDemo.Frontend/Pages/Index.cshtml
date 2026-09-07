@@ -1,0 +1,45 @@
+@model TelDemo.Frontend.Models.HomePageViewModel
+@{
+    ViewData["Title"] = "TelDemo Frontend";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewData["Title"]</title>
+    <style>
+        body { font-family: sans-serif; margin: 2rem; }
+        table { border-collapse: collapse; }
+        th, td { padding: 0.5rem 0.75rem; border: 1px solid #ccc; }
+        .trace { margin-bottom: 1rem; color: #555; }
+    </style>
+</head>
+<body>
+    <h1>TelDemo Frontend</h1>
+    <p class="trace">Current trace: @Model.TraceId</p>
+    <p>This page calls TelDemo.WebApi and demonstrates distributed tracing.</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Temp C</th>
+                <th>Temp F</th>
+                <th>Summary</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var forecast in Model.Forecasts)
+        {
+            <tr>
+                <td>@forecast.Date</td>
+                <td>@forecast.TemperatureC</td>
+                <td>@forecast.TemperatureF</td>
+                <td>@forecast.Summary</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</body>
+</html>

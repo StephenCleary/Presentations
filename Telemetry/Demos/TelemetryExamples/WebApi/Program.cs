@@ -1,5 +1,6 @@
 using Nito.Logging;
 using OpenTelemetry;
+using WebApi.Middleware;
 using WebApi.Services;
 
 // Avoid delays reporting telemtry (only do this for demo code).
@@ -29,6 +30,7 @@ var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseExceptionHandler();
+app.UseMiddleware<FakeUserAuthenticationMiddleware>();
 app.UseAuthorization();
 app.MapControllers();
 app.Run();

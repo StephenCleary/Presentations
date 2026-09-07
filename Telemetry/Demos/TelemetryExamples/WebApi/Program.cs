@@ -19,6 +19,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Export to local OTLP.
 //builder.Services.AddOpenTelemetry().UseOtlpExporter();
 
+// [Demo 5]
+// Export our custom metrics to OTLP.
+//builder.Services.AddOpenTelemetry()
+//    .WithMetrics(metrics => metrics.AddMeter("WebApi.WeatherForecast"));
+
 // [Demo 4.2]
 //builder.Services.AddExceptionLoggingScopes();
 

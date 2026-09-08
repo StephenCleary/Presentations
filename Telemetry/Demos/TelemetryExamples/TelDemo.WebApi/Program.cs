@@ -14,7 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Export to local OTLP.
 //builder.Services.AddOpenTelemetry().UseOtlpExporter();
 
-// [Demo 5]
+// [Demo 5.1]
 // Export our custom metrics to OTLP.
 //builder.Services.AddOpenTelemetry()
 //    .WithMetrics(metrics => metrics.AddMeter("TelDemo.*"));

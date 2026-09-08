@@ -1,0 +1,123 @@
+﻿{
+  "documentPathRoot": "bookmarksFile",
+  "root": {
+    "_bookmarks": [],
+    "Demo 1": {
+      "_bookmarks": [
+        {
+          "id": "2edf01596fef453e90f178e6ec6d2c85",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Program.cs",
+          "lineNumber": 8,
+          "lineText": "// [Demo 1.1]",
+          "slotNumber": 1,
+          "label": "Demo",
+          "color": "blue"
+        },
+        {
+          "id": "88a16f26739746b38f03247f1e73a15e",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Program.cs",
+          "lineNumber": 13,
+          "lineText": "// [Demo 1.2]",
+          "slotNumber": 2,
+          "label": "Program",
+          "color": "blue",
+          "sortIndex": 1
+        }
+      ]
+    },
+    "Demo 2": {
+      "_bookmarks": [
+        {
+          "id": "7c2061466a3742149230bfae5ef9936e",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/WeatherForecastService.cs",
+          "lineNumber": 34,
+          "lineText": "// [Demo 2]",
+          "slotNumber": 3,
+          "label": "WeatherForecastService",
+          "color": "blue"
+        }
+      ]
+    },
+    "Demo 3": {
+      "_bookmarks": [
+        {
+          "id": "f18ce2cc3f8b40c38d311386242001b5",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Middleware/FakeUserAuthenticationMiddleware.cs",
+          "lineNumber": 7,
+          "lineText": "// [Demo 3.2]",
+          "slotNumber": 5,
+          "label": "FakeUserAuthenticationMiddleware",
+          "color": "blue",
+          "sortIndex": 1
+        },
+        {
+          "id": "8b0f2c73528443b19029fca4f0107dc0",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/WeatherForecastService.cs",
+          "lineNumber": 19,
+          "lineText": "// [Demo 3.1]",
+          "slotNumber": 4,
+          "label": "WeatherForecastService1",
+          "color": "blue"
+        }
+      ]
+    },
+    "Demo 4": {
+      "_bookmarks": [
+        {
+          "id": "29a0b35b8a6f4497aa0f1b441f88f400",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Program.cs",
+          "lineNumber": 27,
+          "lineText": "// [Demo 4.2]",
+          "slotNumber": 7,
+          "label": "Demo1",
+          "color": "blue",
+          "sortIndex": 1
+        },
+        {
+          "id": "57a22b1d02ee4645b0fbf9bb48259c4c",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/WeatherForecastService.cs",
+          "lineNumber": 28,
+          "lineText": "// [Demo 4.1]",
+          "slotNumber": 6,
+          "label": "WeatherForecastService2",
+          "color": "blue"
+        }
+      ]
+    },
+    "Demo 5": {
+      "_bookmarks": [
+        {
+          "id": "71264726ea7f4f79ba0cc73ac2ddd96d",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Program.cs",
+          "lineNumber": 17,
+          "lineText": "// [Demo 5.1]",
+          "slotNumber": 8,
+          "label": "Demo2",
+          "color": "blue"
+        },
+        {
+          "id": "2971147c2cd64294826cd6a6a8bc5225",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/WeatherForecastService.cs",
+          "lineNumber": 10,
+          "lineText": "// [Demo 5.2]",
+          "slotNumber": 9,
+          "label": "WeatherForecastService3",
+          "color": "blue",
+          "sortIndex": 1
+        },
+        {
+          "id": "dc4b62ea1bdf45f2a6b4edc2683a3dbf",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/WeatherForecastService.cs",
+          "lineNumber": 37,
+          "lineText": "// [Demo 5.3]",
+          "label": "WeatherForecastService4",
+          "color": "blue",
+          "sortIndex": 2
+        }
+      ]
+    },
+    "Demo 6": {
+      "_bookmarks": []
+    }
+  }
+}

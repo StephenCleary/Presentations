@@ -7,7 +7,7 @@ public class WeatherForecastService(ILogger<WeatherForecastService> logger)
 		"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
 	];
 
-    // [Demo 5]
+    // [Demo 5.2]
     //private static readonly Meter Meter = new("TelDemo.WebApi.WeatherForecast");
     //private static readonly Counter<int> ForecastsGenerated = Meter.CreateCounter<int>("weather_forecasts_generated");
 
@@ -34,7 +34,7 @@ public class WeatherForecastService(ILogger<WeatherForecastService> logger)
 		// [Demo 2]
 		//logger.LogInformation("Forecast result: {temperature}", temperature);
 
-		// [Demo 5]
+		// [Demo 5.3]
 		//ForecastsGenerated.Add(1);
 
 		return new WeatherForecast

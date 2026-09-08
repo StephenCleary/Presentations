@@ -42,10 +42,21 @@ public sealed class RabbitMqConsumerWorker(ILogger<RabbitMqConsumerWorker> logge
             consumeActivity?.SetTag("messaging.destination", queueName);
             consumeActivity?.SetTag("messaging.message.id", eventArgs.BasicProperties.MessageId);
 
-            var report = reportGenerator.GenerateReport(eventArgs.Body);
+            try
+            {
+                await consumeActivity.Execute(async () =>
+                {
+                    var report = reportGenerator.GenerateReport(eventArgs.Body);
 
-            await channel.BasicAckAsync(eventArgs.DeliveryTag, multiple: false, cancellationToken: stoppingToken);
-            logger.LogInformation("Consumed message. {Report}", report);
+                    await channel.BasicAckAsync(eventArgs.DeliveryTag, multiple: false, cancellationToken: stoppingToken);
+                    logger.LogInformation("Consumed message. {Report}", report);
+                });
+            }
+            catch (Exception ex) when (!stoppingToken.IsCancellationRequested)
+            {
+                logger.LogError(ex, "Failed to process RabbitMQ message {MessageId}. Nacking message.", eventArgs.BasicProperties.MessageId);
+                await channel.BasicNackAsync(eventArgs.DeliveryTag, multiple: false, requeue: false, cancellationToken: stoppingToken);
+            }
         };
 
         await channel.BasicConsumeAsync(queue: queueName, autoAck: false, consumer: consumer, cancellationToken: stoppingToken);

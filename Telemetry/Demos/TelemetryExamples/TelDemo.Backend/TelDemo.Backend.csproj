@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="..\TelDemo.WebApi\ActivityExtensions.cs" Link="ActivityExtensions.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Using Include="OpenTelemetry" />
     <Using Include="OpenTelemetry.Context.Propagation" />
     <Using Include="System.Diagnostics" />

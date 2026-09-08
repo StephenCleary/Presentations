@@ -8,8 +8,11 @@ public class HomeController(WeatherApiClient weatherApiClient, RabbitMqPublisher
     public async Task<IActionResult> Index(CancellationToken cancellationToken)
     {
         using var activity = ActivitySource.StartActivity("RenderFrontendHome");
-        var model = await BuildModelAsync(cancellationToken);
-        return View("~/Pages/Index.cshtml", model);
+        return await activity.Execute(async () =>
+        {
+            var model = await BuildModelAsync(cancellationToken);
+            return View("~/Pages/Index.cshtml", model);
+        });
     }
 
     [HttpPost("/publish-message")]
@@ -17,9 +20,12 @@ public class HomeController(WeatherApiClient weatherApiClient, RabbitMqPublisher
     public async Task<IActionResult> PublishMessage(CancellationToken cancellationToken)
     {
         using var activity = ActivitySource.StartActivity("PublishFromFrontend");
-        var messageId = await rabbitMqPublisherService.PublishGenerateWeatherReportMessageAsync();
-        var model = await BuildModelAsync(cancellationToken, messageId);
-        return View("~/Pages/Index.cshtml", model);
+        return await activity.Execute(async () =>
+        {
+            var messageId = await rabbitMqPublisherService.PublishGenerateWeatherReportMessageAsync();
+            var model = await BuildModelAsync(cancellationToken, messageId);
+            return View("~/Pages/Index.cshtml", model);
+        });
     }
 
     private async Task<HomePageViewModel> BuildModelAsync(CancellationToken cancellationToken, string? rabbitMqMessageId = null)

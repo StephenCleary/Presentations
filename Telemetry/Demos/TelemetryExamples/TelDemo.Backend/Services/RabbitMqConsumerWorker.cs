@@ -25,10 +25,19 @@ public sealed class RabbitMqConsumerWorker(ILogger<RabbitMqConsumerWorker> logge
                 ["RabbitMqDeliveryTag"] = eventArgs.DeliveryTag,
             });
 
-            var parentContext = Propagator.Extract(default, eventArgs.BasicProperties, ExtractTraceContextFromBasicProperties);
-            Baggage.Current = parentContext.Baggage;
+            var messageContext = Propagator.Extract(default, eventArgs.BasicProperties, ExtractTraceContextFromBasicProperties);
+            Baggage.Current = messageContext.Baggage;
 
-            using var consumeActivity = ConsumerActivitySource.StartActivity("ProcessRabbitMqMessage", ActivityKind.Consumer, parentContext.ActivityContext);
+            // The following code creates the Consumer activity as a child of the Producer activity.
+            // This is fine if your backend consumers are logically children of the producer.
+            // For a more loosely-connected architecture, you can create the Consumer activity "linked" to the Producer activity as such:
+            // ```
+            // using var consumeActivity = ConsumerActivitySource.StartActivity("ProcessRabbitMqMessage", ActivityKind.Consumer, default(ActivityContext),
+            //     links: messageContext.ActivityContext == default ? [] : [new ActivityLink(messageContext.ActivityContext)]);
+            // ```
+            // Note that telemetry visualization backends may or may not support navigation between *linked* activities.
+
+            using var consumeActivity = ConsumerActivitySource.StartActivity("ProcessRabbitMqMessage", ActivityKind.Consumer, messageContext.ActivityContext);
             consumeActivity?.SetTag("messaging.system", "rabbitmq");
             consumeActivity?.SetTag("messaging.destination", queueName);
             consumeActivity?.SetTag("messaging.message.id", eventArgs.BasicProperties.MessageId);

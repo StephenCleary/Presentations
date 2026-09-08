@@ -117,7 +117,43 @@
       ]
     },
     "Demo 6": {
-      "_bookmarks": []
+      "_bookmarks": [
+        {
+          "id": "b275a735e08541d3bb385e21560fd268",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Program.cs",
+          "lineNumber": 22,
+          "lineText": "// [Demo 6.1]",
+          "label": "Program1",
+          "color": "blue"
+        },
+        {
+          "id": "27c1f1e11b35474e8b1922661673a26d",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/WeatherForecastService.cs",
+          "lineNumber": 14,
+          "lineText": "// [Demo 6.2]",
+          "label": "Demo3",
+          "color": "blue",
+          "sortIndex": 1
+        },
+        {
+          "id": "da47061988e543e0a09333302e833cb4",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/WeatherForecastService.cs",
+          "lineNumber": 22,
+          "lineText": "// [Demo 6.3]",
+          "label": "Demo4",
+          "color": "blue",
+          "sortIndex": 2
+        },
+        {
+          "id": "9204050eb14f44718b24a78ce2f9cf35",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/WeatherForecastService.cs",
+          "lineNumber": 47,
+          "lineText": "// [Demo 6.4]",
+          "label": "Demo5",
+          "color": "blue",
+          "sortIndex": 3
+        }
+      ]
     }
   }
 }

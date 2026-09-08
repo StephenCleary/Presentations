@@ -19,7 +19,7 @@ var builder = WebApplication.CreateBuilder(args);
 //builder.Services.AddOpenTelemetry()
 //    .WithMetrics(metrics => metrics.AddMeter("TelDemo.*"));
 
-// [Demo 6]
+// [Demo 6.1]
 // Export our custom traces to OTLP.
 //builder.Services.AddOpenTelemetry()
 //    .WithTracing(tracing => tracing.AddSource("TelDemo.*"));

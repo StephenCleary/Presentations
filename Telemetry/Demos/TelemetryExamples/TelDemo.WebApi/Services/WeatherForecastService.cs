@@ -11,7 +11,7 @@ public class WeatherForecastService(ILogger<WeatherForecastService> logger)
     //private static readonly Meter Meter = new("TelDemo.WebApi.WeatherForecast");
     //private static readonly Counter<int> ForecastsGenerated = Meter.CreateCounter<int>("weather_forecasts_generated");
 
-	// [Demo 6]
+	// [Demo 6.2]
     //public static readonly ActivitySource ActivitySource = new("TelDemo.WebApi.WeatherForecast");
 
     public WeatherForecast GetWeatherForecast(DateOnly date)
@@ -19,7 +19,7 @@ public class WeatherForecastService(ILogger<WeatherForecastService> logger)
 		// [Demo 3.1]
 		//using var _ = logger.BeginScope(new Dictionary<string, object>() { { "DateRequested", date } });
 
-		// [Demo 6]
+		// [Demo 6.3]
 		//using var activity = ActivitySource.StartActivity("GenerateWeatherForecast");
 		//activity?.SetTag("weather.date_requested", date.ToString("O"));
 		//return activity.Execute(() =>
@@ -44,7 +44,7 @@ public class WeatherForecastService(ILogger<WeatherForecastService> logger)
 			Summary = Summaries[Random.Shared.Next(Summaries.Length)]
 		};
     
-		// [Demo 6]
+		// [Demo 6.4]
         //});
     }
 }

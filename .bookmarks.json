@@ -10,7 +10,7 @@
           "lineNumber": 8,
           "lineText": "// [Demo 1.1]",
           "slotNumber": 1,
-          "label": "Demo",
+          "label": "1.1 Aspire Defaults",
           "color": "blue"
         },
         {
@@ -19,7 +19,7 @@
           "lineNumber": 13,
           "lineText": "// [Demo 1.2]",
           "slotNumber": 2,
-          "label": "Program",
+          "label": "1.2 Export via OTLP",
           "color": "blue",
           "sortIndex": 1
         }
@@ -33,7 +33,7 @@
           "lineNumber": 34,
           "lineText": "// [Demo 2]",
           "slotNumber": 3,
-          "label": "WeatherForecastService",
+          "label": "2 Semantic logging",
           "color": "blue"
         }
       ]
@@ -46,7 +46,7 @@
           "lineNumber": 7,
           "lineText": "// [Demo 3.2]",
           "slotNumber": 5,
-          "label": "FakeUserAuthenticationMiddleware",
+          "label": "3.2 Logging scopes: userid",
           "color": "blue",
           "sortIndex": 1
         },
@@ -56,7 +56,7 @@
           "lineNumber": 19,
           "lineText": "// [Demo 3.1]",
           "slotNumber": 4,
-          "label": "WeatherForecastService1",
+          "label": "3.1 Logging scopes",
           "color": "blue"
         }
       ]
@@ -69,7 +69,7 @@
           "lineNumber": 27,
           "lineText": "// [Demo 4.2]",
           "slotNumber": 7,
-          "label": "Demo1",
+          "label": "4.2 Exception logging scopes",
           "color": "blue",
           "sortIndex": 1
         },
@@ -79,7 +79,7 @@
           "lineNumber": 28,
           "lineText": "// [Demo 4.1]",
           "slotNumber": 6,
-          "label": "WeatherForecastService2",
+          "label": "4.1 Failures",
           "color": "blue"
         }
       ]
@@ -92,7 +92,7 @@
           "lineNumber": 17,
           "lineText": "// [Demo 5.1]",
           "slotNumber": 8,
-          "label": "Demo2",
+          "label": "5.1 Export custom metrics",
           "color": "blue"
         },
         {
@@ -101,7 +101,7 @@
           "lineNumber": 10,
           "lineText": "// [Demo 5.2]",
           "slotNumber": 9,
-          "label": "WeatherForecastService3",
+          "label": "5.2 Declare Meter and Counter",
           "color": "blue",
           "sortIndex": 1
         },
@@ -110,7 +110,7 @@
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/WeatherForecastService.cs",
           "lineNumber": 37,
           "lineText": "// [Demo 5.3]",
-          "label": "WeatherForecastService4",
+          "label": "5.3 Generate metrics",
           "color": "blue",
           "sortIndex": 2
         }
@@ -123,7 +123,7 @@
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Program.cs",
           "lineNumber": 22,
           "lineText": "// [Demo 6.1]",
-          "label": "Program1",
+          "label": "6.1 Export custom traces",
           "color": "blue"
         },
         {
@@ -131,7 +131,7 @@
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/WeatherForecastService.cs",
           "lineNumber": 14,
           "lineText": "// [Demo 6.2]",
-          "label": "Demo3",
+          "label": "6.2 Declare ActivitySource",
           "color": "blue",
           "sortIndex": 1
         },
@@ -140,7 +140,7 @@
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/WeatherForecastService.cs",
           "lineNumber": 22,
           "lineText": "// [Demo 6.3]",
-          "label": "Demo4",
+          "label": "6.3 Create activity",
           "color": "blue",
           "sortIndex": 2
         },
@@ -149,7 +149,7 @@
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/WeatherForecastService.cs",
           "lineNumber": 47,
           "lineText": "// [Demo 6.4]",
-          "label": "Demo5",
+          "label": "6.4 Create activity (2) :: Execute?",
           "color": "blue",
           "sortIndex": 3
         }

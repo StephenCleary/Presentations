@@ -14,6 +14,12 @@ var builder = WebApplication.CreateBuilder(args);
 // Export to local OTLP.
 //builder.Services.AddOpenTelemetry().UseOtlpExporter();
 
+// [Demo 1.3]
+// Third-party libraries can tie into telemetry, too!
+//builder.Services.AddOpenTelemetry()
+//    .WithTracing(tracing => tracing.AddSource("MySqlConnector"))
+//    .WithMetrics(metrics => metrics.AddMeter("MySqlConnector"));
+
 // [Demo 5.1]
 // Export our custom metrics to OTLP.
 //builder.Services.AddOpenTelemetry()
@@ -27,6 +33,7 @@ var builder = WebApplication.CreateBuilder(args);
 // [Demo 4.2]
 //builder.Services.AddExceptionLoggingScopes();
 
+builder.Services.AddMySqlDataSource("Server=localhost;Port=3306;Database=teldemo;Uid=teldemo_user;Pwd=teldemo_password;");
 builder.Services.AddSingleton<WeatherForecastService>();
 builder.Services.AddProblemDetails();
 builder.Services.AddControllers();

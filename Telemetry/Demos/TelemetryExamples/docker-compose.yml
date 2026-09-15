@@ -14,3 +14,22 @@ services:
       interval: 10s
       timeout: 5s
       retries: 10
+
+  mysql:
+    image: mysql
+    container_name: teldemo-mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: teldemo
+      MYSQL_USER: teldemo_user
+      MYSQL_PASSWORD: teldemo_password
+    volumes:
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-prootpassword"]
+      interval: 10s
+      timeout: 5s
+      retries: 10

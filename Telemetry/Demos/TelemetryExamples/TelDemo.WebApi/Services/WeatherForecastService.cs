@@ -1,38 +1,42 @@
 ﻿namespace TelDemo.WebApi.Services;
 
-public class WeatherForecastService(ILogger<WeatherForecastService> logger)
+public class WeatherForecastService(MySqlDataSource dataSource, ILogger<WeatherForecastService> logger)
 {
-	private static readonly string[] Summaries =
-	[
-		"Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-	];
-
-    // [Demo 5.2]
+	// [Demo 5.2]
     //private static readonly Meter Meter = new("TelDemo.WebApi.WeatherForecast");
     //private static readonly Counter<int> ForecastsGenerated = Meter.CreateCounter<int>("weather_forecasts_generated");
 
 	// [Demo 6.2]
     //public static readonly ActivitySource ActivitySource = new("TelDemo.WebApi.WeatherForecast");
 
-    public WeatherForecast GetWeatherForecast(DateOnly date)
+	public async Task<WeatherForecast> GetWeatherForecastAsync(DateOnly date, CancellationToken cancellationToken = default)
 	{
-		// [Demo 3.1]
-		//using var _ = logger.BeginScope(new Dictionary<string, object>() { { "DateRequested", date } });
+        // [Demo 3.1]
+        //using var _ = logger.BeginScope(new Dictionary<string, object>() { { "DateRequested", date } });
 
-		// [Demo 6.3]
-		//using var activity = ActivitySource.StartActivity("GenerateWeatherForecast");
-		//activity?.SetTag("weather.date_requested", date.ToString("O"));
-		//return activity.Execute(() =>
-		//{
+        // [Demo 6.3]
+        //using var activity = ActivitySource.StartActivity("GenerateWeatherForecast");
+        //activity?.SetTag("weather.date_requested", date.ToString("O"));
+        //return activity.Execute(() =>
+        //{
 
-		// [Demo 4.1]
-		//if (date == DateOnly.FromDateTime(DateTime.Now.AddDays(3)))
-		//	throw new InvalidOperationException("Oh no! No temperature available!");
+        // [Demo 4.1]
+        //if (date == DateOnly.FromDateTime(DateTime.Now.AddDays(3)))
+        //	throw new InvalidOperationException("Oh no! No temperature available!");
 
-		var temperature = Random.Shared.Next(-20, 55);
+        await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
+        await using var command = connection.CreateCommand();
+        command.CommandText = "SELECT `temperature_c`, `summary` FROM `temperatures` WHERE `date` = @date LIMIT 1;";
+        command.Parameters.AddWithValue("@date", date.ToDateTime(TimeOnly.MinValue));
+        await using var reader = await command.ExecuteReaderAsync(cancellationToken);
+        if (!await reader.ReadAsync(cancellationToken))
+            throw new InvalidOperationException("Could not forecast temperature; recreate the MySql docker container.");
+
+        var tempC = reader.GetInt32(0);
+        var summary = reader.GetString(1);
 
 		// [Demo 2]
-		//logger.LogInformation("Forecast result: {temperature}", temperature);
+		//logger.LogInformation("Forecast result: {temperature} ({summary})", tempC, summary);
 
 		// [Demo 5.3]
 		//ForecastsGenerated.Add(1);
@@ -40,11 +44,11 @@ public class WeatherForecastService(ILogger<WeatherForecastService> logger)
 		return new WeatherForecast
 		{
 			Date = date,
-			TemperatureC = temperature,
-			Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-		};
-    
-		// [Demo 6.4]
+            TemperatureC = tempC,
+            Summary = summary,
+        };
+
+        // [Demo 6.4]
         //});
     }
 }

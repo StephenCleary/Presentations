@@ -5,11 +5,12 @@ namespace TelDemo.WebApi.Controllers;
 public class WeatherForecastController(WeatherForecastService service) : ControllerBase
 {
 	[HttpGet]
-	public IEnumerable<WeatherForecast> Get()
+	public async Task<IEnumerable<WeatherForecast>> Get(CancellationToken cancellationToken)
 	{
 		var today = DateOnly.FromDateTime(DateTime.Now);
-		return Enumerable.Range(1, 5)
-			.Select(index => service.GetWeatherForecast(today.AddDays(index)))
-			.ToArray();
+		List<WeatherForecast> result = new();
+		for (var index = 0; index != 5; ++index)
+			result.Add(await service.GetWeatherForecastAsync(today.AddDays(index), cancellationToken));
+		return result;
 	}
 }

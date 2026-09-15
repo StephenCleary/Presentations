@@ -163,6 +163,48 @@
           "sortIndex": 3
         }
       ]
+    },
+    "Demo 7": {
+      "_bookmarks": [
+        {
+          "id": "b98b94d3f4804762a1d6f19933b90a8f",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.Frontend/Controllers/HomeController.cs",
+          "lineNumber": 10,
+          "lineText": "using var activity = ActivitySource.StartActivity(\u0022RenderFrontendHome\u0022);",
+          "label": "7 WebApp span",
+          "color": "blue"
+        }
+      ]
+    },
+    "Demo 8": {
+      "_bookmarks": [
+        {
+          "id": "2c1b4f81f53343c6abe30b21044fbb56",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.Backend/Services/RabbitMqConsumerWorker.cs",
+          "lineNumber": 28,
+          "lineText": "// Deserialize Publisher context from RabbitMQ headers.",
+          "label": "8.3 Propagate trace context (receiving)",
+          "color": "blue",
+          "sortIndex": 2
+        },
+        {
+          "id": "163850a4e99f4c8a9a641a61962f9521",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.Frontend/Services/RabbitMqPublisherService.cs",
+          "lineNumber": 16,
+          "lineText": "using var activity = ActivitySource.StartActivity(\u0022PublishMessage\u0022, ActivityKind.Producer);",
+          "label": "8.1 Prodcer activity on WebApp",
+          "color": "blue"
+        },
+        {
+          "id": "cbbc245a9f6640e1945c420321487391",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.Frontend/Services/RabbitMqPublisherService.cs",
+          "lineNumber": 40,
+          "lineText": "// Serialize trace context into RabbitMQ headers.",
+          "label": "8.2 Propagate trace context (sending)",
+          "color": "blue",
+          "sortIndex": 1
+        }
+      ]
     }
   }
 }

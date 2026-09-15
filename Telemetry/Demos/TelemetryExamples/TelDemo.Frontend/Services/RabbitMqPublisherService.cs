@@ -37,6 +37,7 @@ public class RabbitMqPublisherService(ILogger<RabbitMqPublisherService> logger)
                 Headers = new Dictionary<string, object?>()
             };
 
+            // Serialize trace context into RabbitMQ headers.
             var propagationContext = new PropagationContext(activity?.Context ?? default, Baggage.Current);
             Propagator.Inject(propagationContext, properties, static (props, key, value) =>
             {

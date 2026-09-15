@@ -25,6 +25,7 @@ public sealed class RabbitMqConsumerWorker(ILogger<RabbitMqConsumerWorker> logge
                 ["RabbitMqDeliveryTag"] = eventArgs.DeliveryTag,
             });
 
+            // Deserialize Publisher context from RabbitMQ headers.
             var messageContext = Propagator.Extract(default, eventArgs.BasicProperties, ExtractTraceContextFromBasicProperties);
             Baggage.Current = messageContext.Baggage;
 
@@ -46,7 +47,7 @@ public sealed class RabbitMqConsumerWorker(ILogger<RabbitMqConsumerWorker> logge
             {
                 await consumeActivity.Execute(async () =>
                 {
-                    var report = reportGenerator.GenerateReport(eventArgs.Body);
+                    var report = await reportGenerator.GenerateReportAsync(eventArgs.Body);
 
                     await channel.BasicAckAsync(eventArgs.DeliveryTag, multiple: false, cancellationToken: stoppingToken);
                     logger.LogInformation("Consumed message. {Report}", report);

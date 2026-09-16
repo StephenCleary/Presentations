@@ -1,7 +1,0 @@
-Many applications have a need to do background work, whether that is sending emails, maintenance tasks, or periodic data imports/exports. In this session, we’ll cover a few different approaches for background tasks for on-premises, VM, and native Cloud deployments. We’ll cover all kinds of background services, including queue-based and scheduled services, with an eye to supporting distributed deployments.
-
-There is one specific scenario (adding background services to ASP.NET applications) where most developers make a very common mistake (in-memory queues), so we’ll also cover how to properly architecture a solution for this scenario in detail.
-
-You’ll learn tips and tricks for running background processes as Win32 services, Linux systemd, and Docker containers. And you’ll learn several “gotchas” present in the .NET Core BackgroundService class that make background services behave oddly by default.
-
-You’ll be left with actionable advice for how to architect and develop reliable, predictable background services!

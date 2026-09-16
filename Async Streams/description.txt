@@ -1,7 +1,0 @@
-Asynchronous iteration landed in JavaScript last year, and C# is following up with its own async streams. This presentation looks at why these new asynchronous streams are useful, how they are different from existing libraries like System.Reactive and RxJS, and how to use them in your own projects.
-
-We'll start with a conceptual overview of why asynchrony is important, and the impact that async/await has had on modern languages. Then we'll address one of the common shortcomings of async/await: the fact that it only deals with single values.
-
-We'll briefly review library-based approaches for dealing with streams of asynchronous data, including the classic producer/consumer queues as well as the more modern reactive approaches. Finally, we'll address how true pull-based asynchronous streams require language constructs, and examine consuming and producing asynchronous streams in C#.
-
-By the end of this session, you'll be equipped to handle asynchronous streams in your own projects.

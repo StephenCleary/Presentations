@@ -1,5 +1,0 @@
-Most TCP/IP protocols are poorly designed. Surprised? HTTP and FTP have changed over the years, and newer protocols such as WebSockets are designed much more carefully.
-
-This language-agnostic talk will teach you everything you need to know about how to communicate over raw TCP/IP sockets. We'll cover exactly what guarantees TCP/IP provides to your application, and - just as importantly - what it *doesn't* provide. To build your communications strategy on top of TCP/IP, you'll learn about the three essential pillars of TCP/IP protocols: Connections, Message Framing, and Keepalives. These lessons direct how your socket code should be structured, and we'll be looking at examples in a variety of patterns, including streaming, command/response, and multiplexing.
-
-With the embedded devices and the Internet of Things skyrocketing, proper TCP/IP communication has never been more important. This session will teach you how to use TCP/IP sockets effectively to communicate with any kind of device or service in a strongly reliable fashion.

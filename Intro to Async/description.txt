@@ -1,8 +1,0 @@
-(Re-)Learn modern async/await - everything you need to know!
-
-
-
-Now's your chance to (re-)learn async/await, as it applies to modern code. This brand-new talk not only covers asynchronous programming with async/await and the standard techniques and best practices; it also covers how to use *new* types such as `ValueTask<T>` and `Channels`. We'll touch on concurrency, cancellation, progress reporting, and asynchronous streams to round out a complete introduction to modern asynchronous code.
-
-You'll leave this session with the skills necessary to write asynchronous code that takes full advantage of modern techniques. This session is applicable to those who have not yet learned async/await, those who use async/await without a good understanding of them, and those who have learned async/await well but are wondering if there are better, more modern techniques for some common scenarios.
-

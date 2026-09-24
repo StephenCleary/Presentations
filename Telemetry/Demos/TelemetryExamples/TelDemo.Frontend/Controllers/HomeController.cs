@@ -15,27 +15,27 @@ public class HomeController(WeatherApiClient weatherApiClient) : Controller
         });
     }
 
-    [HttpPost("/publish-message")]
+    [HttpPost("/generate-report-via-rabbitmq")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> PublishMessage(CancellationToken cancellationToken)
+    public async Task<IActionResult> GenerateReportViaRabbitMq(CancellationToken cancellationToken)
     {
         using var activity = ActivitySource.StartActivity("PublishFromFrontend");
         return await activity.Execute(async () =>
         {
-            var messageId = await weatherApiClient.PublishMessageAsync(cancellationToken);
+            var messageId = await weatherApiClient.GenerateReportViaRabbitMqAsync(cancellationToken);
             var model = await BuildModelAsync(cancellationToken, rabbitMqMessageId: messageId);
             return View("~/Pages/Index.cshtml", model);
         });
     }
 
-    [HttpPost("/publish-sqs-message")]
+    [HttpPost("/generate-report-via-sqs")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> PublishSqsMessage(CancellationToken cancellationToken)
+    public async Task<IActionResult> GenerateReportViaSqs(CancellationToken cancellationToken)
     {
         using var activity = ActivitySource.StartActivity("PublishSqsFromFrontend");
         return await activity.Execute(async () =>
         {
-            var messageId = await weatherApiClient.PublishSqsMessageAsync(cancellationToken);
+            var messageId = await weatherApiClient.GenerateReportViaSqsAsync(cancellationToken);
             var model = await BuildModelAsync(cancellationToken, sqsMessageId: messageId);
             return View("~/Pages/Index.cshtml", model);
         });

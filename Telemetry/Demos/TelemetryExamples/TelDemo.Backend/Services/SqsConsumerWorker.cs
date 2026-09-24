@@ -97,7 +97,8 @@ public sealed class SqsConsumerWorker(ILogger<SqsConsumerWorker> logger, ReportG
 
     private static IEnumerable<string> ExtractTraceContextFromMessage(Message message, string key)
     {
-        if (!message.MessageAttributes.TryGetValue(key, out var value) || string.IsNullOrWhiteSpace(value.StringValue))
+        var messageAttributes = message.MessageAttributes;
+        if (messageAttributes is null || !messageAttributes.TryGetValue(key, out var value) || string.IsNullOrWhiteSpace(value?.StringValue))
             return [];
 
         return [value.StringValue];

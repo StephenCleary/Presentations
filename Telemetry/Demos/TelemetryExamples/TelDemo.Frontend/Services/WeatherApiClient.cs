@@ -8,16 +8,16 @@ public class WeatherApiClient(HttpClient httpClient)
         return forecasts ?? [];
     }
 
-    public async Task<string> PublishMessageAsync(CancellationToken cancellationToken = default)
+    public async Task<string> GenerateReportViaRabbitMqAsync(CancellationToken cancellationToken = default)
     {
-        using var response = await httpClient.PostAsync("weatherforecast/publish-message", content: null, cancellationToken);
+        using var response = await httpClient.PostAsync("weatherforecast/generate-report-via-rabbitmq", content: null, cancellationToken);
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadAsStringAsync(cancellationToken);
     }
 
-    public async Task<string> PublishSqsMessageAsync(CancellationToken cancellationToken = default)
+    public async Task<string> GenerateReportViaSqsAsync(CancellationToken cancellationToken = default)
     {
-        using var response = await httpClient.PostAsync("weatherforecast/publish-sqs-message", content: null, cancellationToken);
+        using var response = await httpClient.PostAsync("weatherforecast/generate-report-via-sqs", content: null, cancellationToken);
         response.EnsureSuccessStatusCode();
         return await response.Content.ReadAsStringAsync(cancellationToken);
     }

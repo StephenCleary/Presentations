@@ -17,15 +17,15 @@ public class WeatherForecastController(
 		return result;
 	}
 
-	[HttpPost("publish-message")]
-	public async Task<ActionResult<string>> PublishMessage()
+	[HttpPost("generate-report-via-rabbitmq")]
+	public async Task<ActionResult<string>> GenerateReportViaRabbitMq()
 	{
 		var messageId = await rabbitMqPublisherService.PublishGenerateWeatherReportMessageAsync();
 		return Ok(messageId);
 	}
 
-	[HttpPost("publish-sqs-message")]
-	public async Task<ActionResult<string>> PublishSqsMessage(CancellationToken cancellationToken)
+	[HttpPost("generate-report-via-sqs")]
+	public async Task<ActionResult<string>> GenerateReportViaSqs(CancellationToken cancellationToken)
 	{
 		var messageId = await sqsPublisherService.PublishGenerateWeatherReportMessageAsync(cancellationToken);
 		return Ok(messageId);

@@ -15,6 +15,21 @@ services:
       timeout: 5s
       retries: 10
 
+  localstack:
+    image: localstack/localstack
+    container_name: teldemo-localstack
+    restart: unless-stopped
+    ports:
+      - "4566:4566"
+    environment:
+      SERVICES: sqs
+      LOCALSTACK_AUTH_TOKEN: ${LOCALSTACK_AUTH_TOKEN:?Set LOCALSTACK_AUTH_TOKEN to a valid LocalStack auth token.}
+    healthcheck:
+      test: ["CMD", "awslocal", "sqs", "list-queues"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
   mysql:
     image: mysql
     container_name: teldemo-mysql

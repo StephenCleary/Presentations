@@ -19,14 +19,26 @@
     <h1>TelDemo Frontend</h1>
     <p>This page calls TelDemo.WebApi and demonstrates distributed tracing.</p>
 
-    <form method="post" action="/publish-message" style="margin-bottom: 1rem;">
-        @Html.AntiForgeryToken()
-        <button type="submit">Request weather report</button>
-    </form>
+    <div style="display: flex; gap: 1rem; margin-bottom: 1rem;">
+        <form method="post" action="/publish-message">
+            @Html.AntiForgeryToken()
+            <button type="submit">Request weather report via RabbitMQ</button>
+        </form>
+
+        <form method="post" action="/publish-sqs-message">
+            @Html.AntiForgeryToken()
+            <button type="submit">Request weather report via SQS</button>
+        </form>
+    </div>
 
     @if (!string.IsNullOrWhiteSpace(Model.RabbitMqMessageId))
     {
-        <p><strong>Report request id:</strong> @Model.RabbitMqMessageId</p>
+        <p><strong>RabbitMQ request id:</strong> @Model.RabbitMqMessageId</p>
+    }
+
+    @if (!string.IsNullOrWhiteSpace(Model.SqsMessageId))
+    {
+        <p><strong>SQS request id:</strong> @Model.SqsMessageId</p>
     }
 
     <table>

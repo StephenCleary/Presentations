@@ -4,4 +4,5 @@ public class HomePageViewModel
 {
     public IReadOnlyList<WeatherForecast> Forecasts { get; init; } = [];
     public string? RabbitMqMessageId { get; init; }
+    public string? SqsMessageId { get; init; }
 }

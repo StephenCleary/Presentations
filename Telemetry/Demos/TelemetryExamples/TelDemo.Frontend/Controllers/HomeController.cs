@@ -1,6 +1,9 @@
 namespace TelDemo.Frontend.Controllers;
 
-public class HomeController(WeatherApiClient weatherApiClient, RabbitMqPublisherService rabbitMqPublisherService) : Controller
+public class HomeController(
+    WeatherApiClient weatherApiClient,
+    RabbitMqPublisherService rabbitMqPublisherService,
+    SqsPublisherService sqsPublisherService) : Controller
 {
     private static readonly ActivitySource ActivitySource = new("TelDemo.Frontend.Controller");
 
@@ -23,18 +26,35 @@ public class HomeController(WeatherApiClient weatherApiClient, RabbitMqPublisher
         return await activity.Execute(async () =>
         {
             var messageId = await rabbitMqPublisherService.PublishGenerateWeatherReportMessageAsync();
-            var model = await BuildModelAsync(cancellationToken, messageId);
+            var model = await BuildModelAsync(cancellationToken, rabbitMqMessageId: messageId);
             return View("~/Pages/Index.cshtml", model);
         });
     }
 
-    private async Task<HomePageViewModel> BuildModelAsync(CancellationToken cancellationToken, string? rabbitMqMessageId = null)
+    [HttpPost("/publish-sqs-message")]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> PublishSqsMessage(CancellationToken cancellationToken)
+    {
+        using var activity = ActivitySource.StartActivity("PublishSqsFromFrontend");
+        return await activity.Execute(async () =>
+        {
+            var messageId = await sqsPublisherService.PublishGenerateWeatherReportMessageAsync(cancellationToken);
+            var model = await BuildModelAsync(cancellationToken, sqsMessageId: messageId);
+            return View("~/Pages/Index.cshtml", model);
+        });
+    }
+
+    private async Task<HomePageViewModel> BuildModelAsync(
+        CancellationToken cancellationToken,
+        string? rabbitMqMessageId = null,
+        string? sqsMessageId = null)
     {
         var forecasts = await weatherApiClient.GetForecastsAsync(cancellationToken);
         return new HomePageViewModel
         {
             Forecasts = forecasts,
-            RabbitMqMessageId = rabbitMqMessageId
+            RabbitMqMessageId = rabbitMqMessageId,
+            SqsMessageId = sqsMessageId
         };
     }
 }

@@ -7,11 +7,16 @@ var builder = Host.CreateApplicationBuilder(args);
 
 builder.AddServiceDefaults();
 builder.Services.AddOpenTelemetry()
-    .WithTracing(tracing => tracing.AddSource("TelDemo.*"))
+    .WithTracing(tracing => tracing
+        .AddAWSInstrumentation()
+        .AddHttpClientInstrumentation()
+        .AddSource("TelDemo.*")
+        .AddSource("RabbitMQ.*"))
     .UseOtlpExporter();
 
 builder.Services.AddSingleton<ReportGeneratorService>();
 builder.Services.AddHostedService<RabbitMqConsumerWorker>();
+builder.Services.AddHostedService<SqsConsumerWorker>();
 
 var host = builder.Build();
 host.Run();

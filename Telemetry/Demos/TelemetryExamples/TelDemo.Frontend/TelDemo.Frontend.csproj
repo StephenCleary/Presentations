@@ -11,15 +11,25 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Using Include="Amazon.Runtime" />
+    <Using Include="Amazon.SQS" />
+    <Using Include="Amazon.SQS.Model" />
     <Using Include="Microsoft.AspNetCore.Mvc" />
     <Using Include="OpenTelemetry" />
+    <Using Include="OpenTelemetry.Context.Propagation" />
+    <Using Include="OpenTelemetry.Trace" />
+    <Using Include="RabbitMQ.Client" />
     <Using Include="System.Diagnostics" />
     <Using Include="System.Diagnostics.Metrics" />
+    <Using Include="System.Text" />
+    <Using Include="System.Text.Json" />
     <Using Include="TelDemo.Frontend.Models" />
     <Using Include="TelDemo.Frontend.Services" />
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="AWSSDK.SQS" Version="4.0.100.14" />
+    <PackageReference Include="OpenTelemetry.Instrumentation.AWS" Version="1.19.1" />
     <PackageReference Include="RabbitMQ.Client" Version="7.2.2" />
   </ItemGroup>
 

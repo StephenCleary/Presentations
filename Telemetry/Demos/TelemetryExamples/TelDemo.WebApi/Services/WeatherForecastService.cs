@@ -9,7 +9,7 @@ public class WeatherForecastService(MySqlDataSource dataSource, ILogger<WeatherF
 	// [Demo 6.2]
     //public static readonly ActivitySource ActivitySource = new("TelDemo.WebApi.WeatherForecast");
 
-	public async Task<WeatherForecast> GetWeatherForecastAsync(DateOnly date, CancellationToken cancellationToken = default)
+	public async Task<WeatherForecast> GetWeatherForecastAsync(DateOnly date)
 	{
         // [Demo 3.1]
         //using var _ = logger.BeginScope(new Dictionary<string, object>() { { "DateRequested", date } });
@@ -24,12 +24,12 @@ public class WeatherForecastService(MySqlDataSource dataSource, ILogger<WeatherF
         //if (date == DateOnly.FromDateTime(DateTime.Now.AddDays(3)))
         //	throw new InvalidOperationException("Oh no! No temperature available!");
 
-        await using var connection = await dataSource.OpenConnectionAsync(cancellationToken);
+        await using var connection = await dataSource.OpenConnectionAsync();
         await using var command = connection.CreateCommand();
         command.CommandText = "SELECT `temperature_c`, `summary` FROM `temperatures` WHERE `date` = @date LIMIT 1;";
         command.Parameters.AddWithValue("@date", date.ToDateTime(TimeOnly.MinValue));
-        await using var reader = await command.ExecuteReaderAsync(cancellationToken);
-        if (!await reader.ReadAsync(cancellationToken))
+        await using var reader = await command.ExecuteReaderAsync();
+        if (!await reader.ReadAsync())
             throw new InvalidOperationException("Could not forecast temperature; recreate the MySql docker container.");
 
         var tempC = reader.GetInt32(0);

@@ -27,13 +27,13 @@ public sealed class RabbitMqConsumerWorker(ILogger<RabbitMqConsumerWorker> logge
             {
                 var report = await reportGenerator.GenerateReportAsync(eventArgs.Body);
 
-                await channel.BasicAckAsync(eventArgs.DeliveryTag, multiple: false, cancellationToken: stoppingToken);
+                await channel.BasicAckAsync(eventArgs.DeliveryTag, multiple: false, cancellationToken: default);
                 logger.LogInformation("Consumed message. {Report}", report);
             }
             catch (Exception ex) when (!stoppingToken.IsCancellationRequested)
             {
                 logger.LogError(ex, "Failed to process RabbitMQ message {MessageId}. Nacking message.", eventArgs.BasicProperties.MessageId);
-                await channel.BasicNackAsync(eventArgs.DeliveryTag, multiple: false, requeue: false, cancellationToken: stoppingToken);
+                await channel.BasicNackAsync(eventArgs.DeliveryTag, multiple: false, requeue: false, cancellationToken: default);
             }
         };
 

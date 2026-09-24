@@ -8,7 +8,7 @@ public class SqsPublisherService(ILogger<SqsPublisherService> logger)
     private const string ServiceUrl = "http://localhost:4566";
     private const string Region = "us-east-1";
 
-    public async Task<string> PublishGenerateWeatherReportMessageAsync(CancellationToken cancellationToken = default)
+    public async Task<string> PublishGenerateWeatherReportMessageAsync()
     {
         using var activity = ActivitySource.StartActivity("PublishSqsMessage", ActivityKind.Producer);
         return await activity.Execute(async () =>
@@ -21,7 +21,7 @@ public class SqsPublisherService(ILogger<SqsPublisherService> logger)
                     AuthenticationRegion = Region
                 });
 
-            var queueUrl = await GetOrCreateQueueUrlAsync(client, cancellationToken);
+            var queueUrl = await GetOrCreateQueueUrlAsync(client);
 
             // Serialize trace context into SQS message attributes.
             var messageAttributes = new Dictionary<string, MessageAttributeValue>();
@@ -46,7 +46,7 @@ public class SqsPublisherService(ILogger<SqsPublisherService> logger)
                 QueueUrl = queueUrl,
                 MessageBody = payload,
                 MessageAttributes = messageAttributes
-            }, cancellationToken);
+            });
 
             activity?.SetTag("messaging.system", "aws.sqs");
             activity?.SetTag("messaging.destination", QueueName);
@@ -57,11 +57,11 @@ public class SqsPublisherService(ILogger<SqsPublisherService> logger)
         });
     }
 
-    private static async Task<string> GetOrCreateQueueUrlAsync(IAmazonSQS client, CancellationToken cancellationToken)
+    private static async Task<string> GetOrCreateQueueUrlAsync(IAmazonSQS client)
     {
         try
         {
-            var queueUrlResponse = await client.GetQueueUrlAsync(QueueName, cancellationToken);
+            var queueUrlResponse = await client.GetQueueUrlAsync(QueueName);
             return queueUrlResponse.QueueUrl;
         }
         catch (QueueDoesNotExistException)
@@ -69,7 +69,7 @@ public class SqsPublisherService(ILogger<SqsPublisherService> logger)
             var createQueueResponse = await client.CreateQueueAsync(new CreateQueueRequest
             {
                 QueueName = QueueName
-            }, cancellationToken);
+            });
 
             return createQueueResponse.QueueUrl;
         }

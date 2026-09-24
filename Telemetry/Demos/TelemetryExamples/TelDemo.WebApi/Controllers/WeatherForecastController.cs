@@ -8,12 +8,12 @@ public class WeatherForecastController(
 	SqsPublisherService sqsPublisherService) : ControllerBase
 {
 	[HttpGet]
-	public async Task<IEnumerable<WeatherForecast>> Get(CancellationToken cancellationToken)
+	public async Task<IEnumerable<WeatherForecast>> Get()
 	{
 		var today = DateOnly.FromDateTime(DateTime.Now);
 		List<WeatherForecast> result = new();
 		for (var index = 0; index != 5; ++index)
-			result.Add(await service.GetWeatherForecastAsync(today.AddDays(index), cancellationToken));
+			result.Add(await service.GetWeatherForecastAsync(today.AddDays(index)));
 		return result;
 	}
 
@@ -25,9 +25,9 @@ public class WeatherForecastController(
 	}
 
 	[HttpPost("generate-report-via-sqs")]
-	public async Task<ActionResult<string>> GenerateReportViaSqs(CancellationToken cancellationToken)
+	public async Task<ActionResult<string>> GenerateReportViaSqs()
 	{
-		var messageId = await sqsPublisherService.PublishGenerateWeatherReportMessageAsync(cancellationToken);
+		var messageId = await sqsPublisherService.PublishGenerateWeatherReportMessageAsync();
 		return Ok(messageId);
 	}
 }

@@ -8,16 +8,12 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 builder.Services.AddOpenTelemetry()
     .WithTracing(tracing => tracing
-        .AddAWSInstrumentation()
         .AddHttpClientInstrumentation()
-        .AddSource("TelDemo.*")
-        .AddSource("RabbitMQ.*"))
+        .AddSource("TelDemo.*"))
     .UseOtlpExporter();
 
 builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
-builder.Services.AddSingleton<RabbitMqPublisherService>();
-builder.Services.AddSingleton<SqsPublisherService>();
 builder.Services.AddHttpClient<WeatherApiClient>(client => client.BaseAddress = new Uri("http://localhost:5250/"));
 
 var app = builder.Build();

@@ -2,7 +2,10 @@ namespace TelDemo.WebApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
-public class WeatherForecastController(WeatherForecastService service) : ControllerBase
+public class WeatherForecastController(
+	WeatherForecastService service,
+	RabbitMqPublisherService rabbitMqPublisherService,
+	SqsPublisherService sqsPublisherService) : ControllerBase
 {
 	[HttpGet]
 	public async Task<IEnumerable<WeatherForecast>> Get(CancellationToken cancellationToken)
@@ -12,5 +15,19 @@ public class WeatherForecastController(WeatherForecastService service) : Control
 		for (var index = 0; index != 5; ++index)
 			result.Add(await service.GetWeatherForecastAsync(today.AddDays(index), cancellationToken));
 		return result;
+	}
+
+	[HttpPost("publish-message")]
+	public async Task<ActionResult<string>> PublishMessage()
+	{
+		var messageId = await rabbitMqPublisherService.PublishGenerateWeatherReportMessageAsync();
+		return Ok(messageId);
+	}
+
+	[HttpPost("publish-sqs-message")]
+	public async Task<ActionResult<string>> PublishSqsMessage(CancellationToken cancellationToken)
+	{
+		var messageId = await sqsPublisherService.PublishGenerateWeatherReportMessageAsync(cancellationToken);
+		return Ok(messageId);
 	}
 }

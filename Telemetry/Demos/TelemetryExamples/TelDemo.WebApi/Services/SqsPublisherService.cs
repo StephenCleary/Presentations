@@ -1,8 +1,8 @@
-namespace TelDemo.Frontend.Services;
+namespace TelDemo.WebApi.Services;
 
 public class SqsPublisherService(ILogger<SqsPublisherService> logger)
 {
-    private static readonly ActivitySource ActivitySource = new("TelDemo.Frontend.SqsPublisher");
+    private static readonly ActivitySource ActivitySource = new("TelDemo.WebApi.SqsPublisher");
     private static readonly TextMapPropagator Propagator = Propagators.DefaultTextMapPropagator;
     private const string QueueName = "teldemo-sqs";
     private const string ServiceUrl = "http://localhost:4566";

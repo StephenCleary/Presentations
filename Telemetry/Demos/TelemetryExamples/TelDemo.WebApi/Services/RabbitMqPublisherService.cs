@@ -1,4 +1,4 @@
-namespace TelDemo.Frontend.Services;
+namespace TelDemo.WebApi.Services;
 
 public class RabbitMqPublisherService(ILogger<RabbitMqPublisherService> logger)
 {

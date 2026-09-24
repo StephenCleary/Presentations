@@ -1,9 +1,6 @@
 namespace TelDemo.Frontend.Controllers;
 
-public class HomeController(
-    WeatherApiClient weatherApiClient,
-    RabbitMqPublisherService rabbitMqPublisherService,
-    SqsPublisherService sqsPublisherService) : Controller
+public class HomeController(WeatherApiClient weatherApiClient) : Controller
 {
     private static readonly ActivitySource ActivitySource = new("TelDemo.Frontend.Controller");
 
@@ -25,7 +22,7 @@ public class HomeController(
         using var activity = ActivitySource.StartActivity("PublishFromFrontend");
         return await activity.Execute(async () =>
         {
-            var messageId = await rabbitMqPublisherService.PublishGenerateWeatherReportMessageAsync();
+            var messageId = await weatherApiClient.PublishMessageAsync(cancellationToken);
             var model = await BuildModelAsync(cancellationToken, rabbitMqMessageId: messageId);
             return View("~/Pages/Index.cshtml", model);
         });
@@ -38,7 +35,7 @@ public class HomeController(
         using var activity = ActivitySource.StartActivity("PublishSqsFromFrontend");
         return await activity.Execute(async () =>
         {
-            var messageId = await sqsPublisherService.PublishGenerateWeatherReportMessageAsync(cancellationToken);
+            var messageId = await weatherApiClient.PublishSqsMessageAsync(cancellationToken);
             var model = await BuildModelAsync(cancellationToken, sqsMessageId: messageId);
             return View("~/Pages/Index.cshtml", model);
         });

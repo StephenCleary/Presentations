@@ -75,7 +75,7 @@
         {
           "id": "29a0b35b8a6f4497aa0f1b441f88f400",
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Program.cs",
-          "lineNumber": 33,
+          "lineNumber": 36,
           "lineText": "// [Demo 4.2]",
           "slotNumber": 7,
           "label": "4.2 Exception logging scopes",
@@ -98,7 +98,7 @@
         {
           "id": "71264726ea7f4f79ba0cc73ac2ddd96d",
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Program.cs",
-          "lineNumber": 23,
+          "lineNumber": 26,
           "lineText": "// [Demo 5.1]",
           "slotNumber": 8,
           "label": "5.1 Export custom metrics",
@@ -130,7 +130,7 @@
         {
           "id": "b275a735e08541d3bb385e21560fd268",
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Program.cs",
-          "lineNumber": 28,
+          "lineNumber": 31,
           "lineText": "// [Demo 6.1]",
           "label": "6.1 Export custom traces",
           "color": "blue"
@@ -169,7 +169,7 @@
         {
           "id": "b98b94d3f4804762a1d6f19933b90a8f",
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.Frontend/Controllers/HomeController.cs",
-          "lineNumber": 13,
+          "lineNumber": 10,
           "lineText": "using var activity = ActivitySource.StartActivity(\u0022RenderFrontendHome\u0022);",
           "label": "7 WebApp span",
           "color": "blue"
@@ -189,7 +189,7 @@
         },
         {
           "id": "163850a4e99f4c8a9a641a61962f9521",
-          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.Frontend/Services/SqsPublisherService.cs",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/SqsPublisherService.cs",
           "lineNumber": 13,
           "lineText": "using var activity = ActivitySource.StartActivity(\u0022PublishSqsMessage\u0022, ActivityKind.Producer);",
           "label": "8.1 Prodcer activity on WebApp",
@@ -197,7 +197,7 @@
         },
         {
           "id": "cbbc245a9f6640e1945c420321487391",
-          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.Frontend/Services/SqsPublisherService.cs",
+          "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/SqsPublisherService.cs",
           "lineNumber": 26,
           "lineText": "// Serialize trace context into SQS message attributes.",
           "label": "8.2 Propagate trace context (sending)",

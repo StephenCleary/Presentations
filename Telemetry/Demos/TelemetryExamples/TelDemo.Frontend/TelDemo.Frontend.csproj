@@ -13,6 +13,9 @@
   <ItemGroup>
     <Using Include="Microsoft.AspNetCore.Mvc" />
     <Using Include="OpenTelemetry" />
+    <Using Include="OpenTelemetry.Logs" />
+    <Using Include="OpenTelemetry.Metrics" />
+    <Using Include="OpenTelemetry.Resources" />
     <Using Include="OpenTelemetry.Trace" />
     <Using Include="System.Diagnostics" />
     <Using Include="TelDemo.Frontend.Models" />

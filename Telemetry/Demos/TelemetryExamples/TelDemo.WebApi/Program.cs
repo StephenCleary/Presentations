@@ -13,6 +13,10 @@ var builder = WebApplication.CreateBuilder(args);
 // [Demo 1.2]
 // Export to local OTLP.
 //builder.Services.AddOpenTelemetry().UseOtlpExporter();
+//builder.Services.AddOpenTelemetry()
+//    .WithTracing(tracing => tracing.ConfigureResource(resource => resource.AddService("TelDemo.WebApi")))
+//    .WithMetrics(metrics => metrics.ConfigureResource(resource => resource.AddService("TelDemo.WebApi")))
+//    .WithLogging(logging => logging.ConfigureResource(resource => resource.AddService("TelDemo.WebApi")));
 
 // [Demo 1.3]
 // Third-party libraries can tie into telemetry, too!

@@ -8,10 +8,13 @@ var builder = Host.CreateApplicationBuilder(args);
 builder.AddServiceDefaults();
 builder.Services.AddOpenTelemetry()
     .WithTracing(tracing => tracing
+        .ConfigureResource(resource => resource.AddService("TelDemo.Backend"))
         .AddAWSInstrumentation()
         .AddHttpClientInstrumentation()
         .AddSource("TelDemo.*")
         .AddSource("RabbitMQ.*"))
+    .WithMetrics(metrics => metrics.ConfigureResource(resource => resource.AddService("TelDemo.Backend")))
+    .WithLogging(logging => logging.ConfigureResource(resource => resource.AddService("TelDemo.Backend")))
     .UseOtlpExporter();
 
 builder.Services.AddSingleton<ReportGeneratorService>();

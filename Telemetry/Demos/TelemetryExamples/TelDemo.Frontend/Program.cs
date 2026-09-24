@@ -8,8 +8,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 builder.Services.AddOpenTelemetry()
     .WithTracing(tracing => tracing
+        .ConfigureResource(resource => resource.AddService("TelDemo.Frontend"))
         .AddHttpClientInstrumentation()
         .AddSource("TelDemo.*"))
+    .WithMetrics(metrics => metrics.ConfigureResource(resource => resource.AddService("TelDemo.Frontend")))
+    .WithLogging(logging => logging.ConfigureResource(resource => resource.AddService("TelDemo.Frontend")))
     .UseOtlpExporter();
 
 builder.Services.AddControllersWithViews();

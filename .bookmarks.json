@@ -26,7 +26,7 @@
         {
           "id": "49f249a10f3149949d4f70c229a425e1",
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Program.cs",
-          "lineNumber": 17,
+          "lineNumber": 21,
           "lineText": "// [Demo 1.3]",
           "label": "1.3 Third-party libraries",
           "color": "blue",
@@ -75,7 +75,7 @@
         {
           "id": "29a0b35b8a6f4497aa0f1b441f88f400",
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Program.cs",
-          "lineNumber": 36,
+          "lineNumber": 40,
           "lineText": "// [Demo 4.2]",
           "slotNumber": 7,
           "label": "4.2 Exception logging scopes",
@@ -98,7 +98,7 @@
         {
           "id": "71264726ea7f4f79ba0cc73ac2ddd96d",
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Program.cs",
-          "lineNumber": 26,
+          "lineNumber": 30,
           "lineText": "// [Demo 5.1]",
           "slotNumber": 8,
           "label": "5.1 Export custom metrics",
@@ -130,7 +130,7 @@
         {
           "id": "b275a735e08541d3bb385e21560fd268",
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Program.cs",
-          "lineNumber": 31,
+          "lineNumber": 35,
           "lineText": "// [Demo 6.1]",
           "label": "6.1 Export custom traces",
           "color": "blue"

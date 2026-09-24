@@ -15,6 +15,9 @@
     <Using Include="Nito.Logging" />
     <Using Include="OpenTelemetry" />
     <Using Include="OpenTelemetry.Context.Propagation" />
+    <Using Include="OpenTelemetry.Logs" />
+    <Using Include="OpenTelemetry.Metrics" />
+    <Using Include="OpenTelemetry.Resources" />
     <Using Include="OpenTelemetry.Trace" />
     <Using Include="RabbitMQ.Client" />
     <Using Include="System.Diagnostics" />

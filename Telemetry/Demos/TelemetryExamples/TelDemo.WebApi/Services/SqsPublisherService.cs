@@ -3,7 +3,6 @@ namespace TelDemo.WebApi.Services;
 public class SqsPublisherService(ILogger<SqsPublisherService> logger)
 {
     private static readonly ActivitySource ActivitySource = new("TelDemo.WebApi.SqsPublisher");
-    private static readonly TextMapPropagator Propagator = Propagators.DefaultTextMapPropagator;
     private const string QueueName = "teldemo-sqs";
     private const string ServiceUrl = "http://localhost:4566";
     private const string Region = "us-east-1";
@@ -25,13 +24,12 @@ public class SqsPublisherService(ILogger<SqsPublisherService> logger)
 
             // Serialize trace context into SQS message attributes.
             var messageAttributes = new Dictionary<string, MessageAttributeValue>();
-            var propagationContext = new PropagationContext(activity?.Context ?? default, Baggage.Current);
-            Propagator.Inject(propagationContext, messageAttributes, static (attributes, key, value) =>
+            DistributedContextPropagator.Current.Inject(activity, messageAttributes, (_, key, value) =>
             {
-                attributes[key] = new MessageAttributeValue
+                messageAttributes[key] = new MessageAttributeValue
                 {
                     DataType = "String",
-                    StringValue = value
+                    StringValue = value,
                 };
             });
 

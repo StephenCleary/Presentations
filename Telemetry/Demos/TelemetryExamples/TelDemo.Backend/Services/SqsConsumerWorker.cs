@@ -3,7 +3,6 @@ namespace TelDemo.Backend.Services;
 public sealed class SqsConsumerWorker(ILogger<SqsConsumerWorker> logger, ReportGeneratorService reportGenerator) : BackgroundService
 {
     private static readonly ActivitySource ConsumerActivitySource = new("TelDemo.Backend.Consumer");
-    private static readonly TextMapPropagator Propagator = Propagators.DefaultTextMapPropagator;
     private const string QueueName = "teldemo-sqs";
     private const string ServiceUrl = "http://localhost:4566";
     private const string Region = "us-east-1";
@@ -43,7 +42,7 @@ public sealed class SqsConsumerWorker(ILogger<SqsConsumerWorker> logger, ReportG
                 });
 
                 // Deserialize Publisher context from SQS message attributes.
-                var messageContext = Propagator.Extract(default, message, ExtractTraceContextFromMessage);
+                var messageContext = ExtractPropagationContext(message, ExtractTraceContextFromMessage);
                 Baggage.Current = messageContext.Baggage;
 
                 // The following code creates the Consumer activity as a child of the Producer activity.
@@ -95,12 +94,26 @@ public sealed class SqsConsumerWorker(ILogger<SqsConsumerWorker> logger, ReportG
         }
     }
 
-    private static IEnumerable<string> ExtractTraceContextFromMessage(Message message, string key)
+    private static PropagationContext ExtractPropagationContext(object? carrier, DistributedContextPropagator.PropagatorGetterCallback getter)
     {
-        var messageAttributes = message.MessageAttributes;
-        if (messageAttributes is null || !messageAttributes.TryGetValue(key, out var value) || string.IsNullOrWhiteSpace(value?.StringValue))
-            return [];
+        DistributedContextPropagator.Current.ExtractTraceIdAndState(carrier, getter, out var traceParent, out var traceState);
+        var baggage = Baggage.Create(DistributedContextPropagator.Current.ExtractBaggage(carrier, getter)
+            ?.Where(static item => item.Value is not null)?.ToDictionary(static item => item.Key, static item => item.Value!));
+        ActivityContext.TryParse(traceParent, traceState, out var activityContext);
+        return new PropagationContext(activityContext, baggage);
+    }
 
-        return [value.StringValue];
+    private static void ExtractTraceContextFromMessage(object? carrier, string key, out string? value, out IEnumerable<string>? values)
+    {
+        var messageAttributes = (carrier as Message)?.MessageAttributes;
+        if (messageAttributes is null || !messageAttributes.TryGetValue(key, out var messageAttribute) || string.IsNullOrWhiteSpace(messageAttribute?.StringValue))
+        {
+            value = null;
+            values = [];
+            return;
+        }
+
+        value = messageAttribute.StringValue;
+        values = [messageAttribute.StringValue];
     }
 }

@@ -181,7 +181,7 @@
         {
           "id": "2c1b4f81f53343c6abe30b21044fbb56",
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.Backend/Services/SqsConsumerWorker.cs",
-          "lineNumber": 45,
+          "lineNumber": 44,
           "lineText": "// Deserialize Publisher context from SQS message attributes.",
           "label": "8.3 Propagate trace context (receiving)",
           "color": "blue",
@@ -190,7 +190,7 @@
         {
           "id": "163850a4e99f4c8a9a641a61962f9521",
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/SqsPublisherService.cs",
-          "lineNumber": 13,
+          "lineNumber": 12,
           "lineText": "using var activity = ActivitySource.StartActivity(\u0022PublishSqsMessage\u0022, ActivityKind.Producer);",
           "label": "8.1 Prodcer activity on WebApp",
           "color": "blue"
@@ -198,7 +198,7 @@
         {
           "id": "cbbc245a9f6640e1945c420321487391",
           "documentPath": "Telemetry/Demos/TelemetryExamples/TelDemo.WebApi/Services/SqsPublisherService.cs",
-          "lineNumber": 26,
+          "lineNumber": 25,
           "lineText": "// Serialize trace context into SQS message attributes.",
           "label": "8.2 Propagate trace context (sending)",
           "color": "blue",

@@ -15,17 +15,14 @@ services:
       timeout: 5s
       retries: 10
 
-  localstack:
-    image: localstack/localstack
-    container_name: teldemo-localstack
+  ministack:
+    image: ministackorg/ministack:latest
+    container_name: teldemo-ministack
     restart: unless-stopped
     ports:
       - "4566:4566"
-    environment:
-      SERVICES: sqs
-      LOCALSTACK_AUTH_TOKEN: ${LOCALSTACK_AUTH_TOKEN:?Set LOCALSTACK_AUTH_TOKEN to a valid LocalStack auth token.}
     healthcheck:
-      test: ["CMD", "awslocal", "sqs", "list-queues"]
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:4566/_ministack/health')"]
       interval: 10s
       timeout: 5s
       retries: 10

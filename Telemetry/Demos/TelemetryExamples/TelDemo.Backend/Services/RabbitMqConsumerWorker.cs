@@ -28,7 +28,7 @@ public sealed class RabbitMqConsumerWorker(ILogger<RabbitMqConsumerWorker> logge
                 var report = await reportGenerator.GenerateReportAsync(eventArgs.Body);
 
                 await channel.BasicAckAsync(eventArgs.DeliveryTag, multiple: false, cancellationToken: default);
-                logger.LogInformation("Consumed message. {Report}", report);
+                logger.LogInformation("Consumed RabbitMQ message. {Report}", report);
             }
             catch (Exception ex) when (!stoppingToken.IsCancellationRequested)
             {

@@ -1,7 +1,0 @@
-= Protocol Design
-
-This language-agnostic talk will examine the design of application protocols, with a focus on TCP/IP.
-
-This talk is part history and part practical implementation. If you have a need to design a TCP/IP protocol, then this talk will cover everything you need. Most bugs in TCP/IP applications are actually misunderstandings about TCP/IP itself, so this talk highlights the parts of TCP/IP that are most problematic with practical advice about avoiding pitfalls with your application protocol.
-
-We'll also be covering several mistakes from history as we go along, most specifically HTTP and the improvements it made with HTTP/1.1, HTTP/2, and the new HTTP/3 based on QUIC. Spoiler alert: QUIC is the future for almost all protocols; we'll cover how QUIC compares to TCP/IP specifically in terms of application protocol design. Today TCP/IP is more available (in terms of APIs), but QUIC is not that far off, and this talk will cover application protocol design considerations for both.

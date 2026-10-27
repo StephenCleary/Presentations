@@ -3,7 +3,6 @@
   <Namespace>System.Threading.Channels</Namespace>
   <Namespace>System.Collections.Concurrent</Namespace>
   <Namespace>System.Runtime.CompilerServices</Namespace>
-  <RuntimeVersion>5.0</RuntimeVersion>
 </Query>
 
 async Task Main()

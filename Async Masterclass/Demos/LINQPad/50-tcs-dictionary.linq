@@ -2,7 +2,6 @@
   <Namespace>System.Threading.Tasks</Namespace>
   <Namespace>System.Threading.Channels</Namespace>
   <Namespace>System.Collections.Concurrent</Namespace>
-  <RuntimeVersion>5.0</RuntimeVersion>
 </Query>
 
 void Main()
